@@ -24,6 +24,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.webkit.WebView;
 
 import com.example.sportsgo.sportsgo.utilities.NetworkUtils;
 
@@ -40,6 +41,7 @@ public class MainActivity1 extends AppCompatActivity {
 
     private SearchView srView;
 
+    private WebView myBrowser;
     // TODO (12) Create a variable to store a reference to the error message TextView
     private TextView mErrorMessageTextView;
     // TODO (24) Create a ProgressBar variable to store a reference to the ProgressBar
@@ -48,6 +50,14 @@ public class MainActivity1 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        myBrowser = (WebView)findViewById(R.id.mybrowser);
+
+        //final MyJavaScriptInterface myJavaScriptInterface
+        //        = new MyJavaScriptInterface(this);
+        //myBrowser.addJavascriptInterface(myJavaScriptInterface, "AndroidFunction");
+
+        //myBrowser.getSettings().setJavaScriptEnabled(true);
+        myBrowser.loadUrl("https://data.gov.sg/dataset/realtime-weather-readings/resource/17494bed-23e9-4b3b-ae89-232f87987163/view/81d91c06-158d-4f01-abd9-12108d954847");
         srView = new SearchView();
         mSearchBoxEditText = (EditText) findViewById(R.id.et_search_box);
         mUrlDisplayTextView = (TextView) findViewById(R.id.tv_url_display);

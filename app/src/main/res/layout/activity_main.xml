@@ -62,6 +62,11 @@
             android:text="@string/error_message"
             android:visibility="invisible"
             />
+        <WebView
+            android:id="@+id/mybrowser"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            />
         <ProgressBar
             android:id="@+id/pb_loading_indicator"
             android:layout_width="42dp"
