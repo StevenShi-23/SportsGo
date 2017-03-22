@@ -29,8 +29,8 @@ import java.util.Scanner;
  */
 public class NetworkUtils {
 
-    final static String GITHUB_BASE_URL =
-            "http://sportsgo.cloudapp.net:8080";
+    final static String BACKEND_BASE_URL =
+            "http://sports-go.cloudapp.net";
 
     final static String PARAM_QUERY = "q";
 
@@ -42,15 +42,15 @@ public class NetworkUtils {
     final static String sortBy = "stars";
     final static String hello = "hello";
     /**
-     * Builds the URL used to query GitHub.
+     * Builds the URL used to query backend.
      *
-     * @param githubSearchQuery The keyword that will be queried for.
-     * @return The URL to use to query the GitHub.
+     * @param backendSearchQuery The keyword that will be queried for.
+     * @return The URL to use to query the backend.
      */
-    public static URL buildUrl(String githubSearchQuery) {
-        Uri builtUri = Uri.parse(GITHUB_BASE_URL).buildUpon()
-                .appendPath(hello)
-                //.appendQueryParameter(PARAM_QUERY, githubSearchQuery)
+    public static URL buildUrl(String backendSearchQuery) {
+        Uri builtUri = Uri.parse(BACKEND_BASE_URL).buildUpon()
+                //.appendPath(hello)
+                //.appendQueryParameter(PARAM_QUERY, backendSearchQuery)
                 //.appendQueryParameter(PARAM_SORT, sortBy)
                 .build();
 
