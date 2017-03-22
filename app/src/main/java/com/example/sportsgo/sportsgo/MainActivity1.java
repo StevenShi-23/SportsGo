@@ -42,9 +42,7 @@ public class MainActivity1 extends AppCompatActivity {
     private SearchView srView;
 
     private WebView myBrowser;
-    // TODO (12) Create a variable to store a reference to the error message TextView
     private TextView mErrorMessageTextView;
-    // TODO (24) Create a ProgressBar variable to store a reference to the ProgressBar
     private ProgressBar mLoadingIndicator;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,21 +81,16 @@ public class MainActivity1 extends AppCompatActivity {
         //new GithubQueryTask().execute(githubSearchUrl);
     }
 
-    // TODO (14) Create a method called showJsonDataView to show the data and hide the error
     private void showJsonDataView(){
         mErrorMessageTextView.setVisibility(View.INVISIBLE);
         mSearchResultsTextView.setVisibility(View.VISIBLE);
     }
-    // TODO (15) Create a method called showErrorMessage to show the error and hide the data
-
     private void showErrorMessage(){
         mErrorMessageTextView.setVisibility(View.VISIBLE);
         mSearchResultsTextView.setVisibility(View.INVISIBLE);
     }
 
     public class GithubQueryTask extends AsyncTask<URL, Void, String> {
-
-        // TODO (26) Override onPreExecute to set the loading indicator to visible
 
 
         @Override

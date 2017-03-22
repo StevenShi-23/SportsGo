@@ -5,7 +5,7 @@ package com.example.sportsgo.sportsgo;
  */
 
 public class Facility {
-    private String description, name, weather_status;
-    private double longitude, latitude, temperature;
-    private int id;
+    protected String description, name, weather_status;
+    protected double longitude, latitude, temperature;
+    protected int id;
 }
