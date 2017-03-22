@@ -11,12 +11,12 @@ public class SearchController {
         fctrl = new FacilityController();
     }
 
-    public Object FilterAndSortRequest(){
+    public Facility[] FilterAndSortRequest(){
         return null;
     }
 
-    Object searchKeyword(String key){
-        Object MatchedFacilities = fctrl.GetMatchedFacilities(key);
+    Facility[] searchKeyword(String key){
+        Facility MatchedFacilities[] = fctrl.GetMatchedFacilities(key);
         return MatchedFacilities;
     }
 }

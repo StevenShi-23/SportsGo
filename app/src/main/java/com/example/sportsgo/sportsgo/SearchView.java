@@ -6,13 +6,13 @@ package com.example.sportsgo.sportsgo;
 
 public class SearchView {
     private SearchController schctrl;
-    private Object Facilities;
+    private Facility[] Facilities;
     private String kw;
 
     public SearchView(){ //constructor
         schctrl = new SearchController();
         kw = "";
-        Object Facilities = new Object();
+        Facilities = new Facility[3];
     }
 
     public void search(String key){ //enter keyword
@@ -22,7 +22,7 @@ public class SearchView {
     }
 
     public String filterResult(String s){
-        Object Facilities = schctrl.FilterAndSortRequest();
+        Facilities = schctrl.FilterAndSortRequest();
         PrepareBriefView();
         return "You searched for "+s;
     }
