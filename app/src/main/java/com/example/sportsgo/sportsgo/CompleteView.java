@@ -12,7 +12,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class CompleteView extends FragmentActivity implements OnMapReadyCallback {
-
+    //private Facility
     private GoogleMap mMap;
 
     @Override
