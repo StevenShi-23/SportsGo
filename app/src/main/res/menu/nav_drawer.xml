@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_profiles"
+        android:title="@string/nav_search"
+       />
+    <!-- android:icon="@drawable/ic_menu_share" -->
+
+    <item
+        android:id="@+id/nav_plants"
+        android:title="@string/nav_favourite" />
+
+</menu>
