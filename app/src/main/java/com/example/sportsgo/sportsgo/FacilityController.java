@@ -10,10 +10,10 @@ import java.net.*;
 import java.io.*;
 
 public class FacilityController {
-    public Object GetMatchedFacilities(String key){
+    public Facility[] GetMatchedFacilities(String key){
         URL query;
         URLConnection yc;
-        Object target = new Object();
+        Facility[] target = new Facility[3];
         try {
             query = new URL("http://www.oracle.com/");
             yc = query.openConnection();
@@ -23,7 +23,7 @@ public class FacilityController {
             while ((inputLine = in.readLine()) != null)
                 System.out.println(inputLine);
             in.close();
-            target = new Object();
+            target = new Facility[3];
         } catch (IOException e) {
             e.printStackTrace();
         }
