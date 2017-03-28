@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.sportsgo.sportsgo.CompleteView">
+    tools:context="com.example.sportsgo.sportsgo.utilities.Boundary.CompleteView">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -27,6 +27,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.webkit.WebView;
 
+import com.example.sportsgo.sportsgo.utilities.Boundary.SearchView;
 import com.example.sportsgo.sportsgo.utilities.NetworkUtils;
 
 import java.io.IOException;
