@@ -11,6 +11,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
+
 public class CompleteView extends FragmentActivity implements OnMapReadyCallback {
     //private Facility
     private GoogleMap mMap;
@@ -18,6 +20,7 @@ public class CompleteView extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("Start","Here");
         setContentView(R.layout.activity_complete_view);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()

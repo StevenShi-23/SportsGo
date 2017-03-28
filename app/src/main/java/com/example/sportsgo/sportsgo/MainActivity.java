@@ -18,6 +18,7 @@ package com.example.sportsgo.sportsgo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -43,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        Log.d("Start","Here");
+        setContentView(R.layout.activitiy_search);
 
         mSearchBoxEditText = (EditText) findViewById(R.id.et_search_box);
 
