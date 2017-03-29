@@ -1,9 +1,10 @@
 //Google map api key: AIzaSyDZfnfEjzu-9bBwswox4Q_DK_LefWnrd54
-package com.example.sportsgo.sportsgo;
+package com.example.sportsgo.sportsgo.utilities.Boundary;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
+import com.example.sportsgo.sportsgo.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -11,6 +12,12 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
+
+/**
+ * This class handles the UI of complete view (detailed view) of a facility
+ * @author
+ */
 public class CompleteView extends FragmentActivity implements OnMapReadyCallback {
     //private Facility
     private GoogleMap mMap;
@@ -18,6 +25,7 @@ public class CompleteView extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("Start","Here");
         setContentView(R.layout.activity_complete_view);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()

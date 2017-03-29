@@ -34,7 +34,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".CompleteView"
+            android:name=".utilities.Boundary.CompleteView"
             android:label="@string/title_activity_complete_viw">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

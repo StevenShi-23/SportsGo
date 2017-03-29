@@ -18,6 +18,7 @@ package com.example.sportsgo.sportsgo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +27,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.webkit.WebView;
 
+import com.example.sportsgo.sportsgo.utilities.Boundary.SearchView;
 import com.example.sportsgo.sportsgo.utilities.NetworkUtils;
 
 import java.io.IOException;
@@ -47,7 +49,8 @@ public class MainActivity1 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        Log.d("Start","Here");
+        setContentView(R.layout.activitiy_search);
         myBrowser = (WebView)findViewById(R.id.mybrowser);
 
         //final MyJavaScriptInterface myJavaScriptInterface
