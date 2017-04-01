@@ -1,5 +1,5 @@
 //Google map api key: AIzaSyDZfnfEjzu-9bBwswox4Q_DK_LefWnrd54
-package com.example.sportsgo.sportsgo.utilities.Boundary;
+package com.example.sportsgo.sportsgo.Activities;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;

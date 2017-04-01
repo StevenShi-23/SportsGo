@@ -1,4 +1,4 @@
-package com.example.sportsgo.sportsgo.utilities;
+package com.example.sportsgo.sportsgo.view;
 
 /**
  * Created by StevenShi on 22/3/17.

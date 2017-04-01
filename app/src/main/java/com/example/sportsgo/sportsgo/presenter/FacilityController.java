@@ -1,6 +1,6 @@
-package com.example.sportsgo.sportsgo.utilities.Control;
+package com.example.sportsgo.sportsgo.presenter;
 
-import com.example.sportsgo.sportsgo.utilities.Entity.Facility;
+import com.example.sportsgo.sportsgo.model.Facility;
 
 import java.io.BufferedReader;
 import java.net.URLConnection;

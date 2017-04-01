@@ -1,4 +1,4 @@
-package com.example.sportsgo.sportsgo.utilities.Entity;
+package com.example.sportsgo.sportsgo.model;
 
 /**
  * This class implements the Facility entity with
