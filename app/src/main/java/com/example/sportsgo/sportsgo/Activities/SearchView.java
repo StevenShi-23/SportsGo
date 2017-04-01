@@ -1,7 +1,7 @@
-package com.example.sportsgo.sportsgo.utilities.Boundary;
+package com.example.sportsgo.sportsgo.Activities;
 
-import com.example.sportsgo.sportsgo.utilities.Control.SearchController;
-import com.example.sportsgo.sportsgo.utilities.Entity.Facility;
+import com.example.sportsgo.sportsgo.presenter.SearchController;
+import com.example.sportsgo.sportsgo.model.Facility;
 
 /**
  * This class handles the UI of the search view

@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.sportsgo.sportsgo;
-// Created by Long 18/3, inorder to to searchView
+package com.example.sportsgo.sportsgo.Activities;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -25,15 +25,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.webkit.WebView;
 
-import com.example.sportsgo.sportsgo.utilities.Boundary.SearchView;
+import com.example.sportsgo.sportsgo.R;
 import com.example.sportsgo.sportsgo.utilities.NetworkUtils;
 
 import java.io.IOException;
 import java.net.URL;
 
-public class MainActivity1 extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     private EditText mSearchBoxEditText;
 
@@ -41,9 +40,6 @@ public class MainActivity1 extends AppCompatActivity {
 
     private TextView mSearchResultsTextView;
 
-    private SearchView srView;
-
-    private WebView myBrowser;
     private TextView mErrorMessageTextView;
     private ProgressBar mLoadingIndicator;
     @Override
@@ -51,22 +47,13 @@ public class MainActivity1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.d("Start","Here");
         setContentView(R.layout.activitiy_search);
-        myBrowser = (WebView)findViewById(R.id.mybrowser);
 
-        //final MyJavaScriptInterface myJavaScriptInterface
-        //        = new MyJavaScriptInterface(this);
-        //myBrowser.addJavascriptInterface(myJavaScriptInterface, "AndroidFunction");
-
-        //myBrowser.getSettings().setJavaScriptEnabled(true);
-        myBrowser.loadUrl("https://data.gov.sg/dataset/realtime-weather-readings/resource/17494bed-23e9-4b3b-ae89-232f87987163/view/81d91c06-158d-4f01-abd9-12108d954847");
-        srView = new SearchView();
         mSearchBoxEditText = (EditText) findViewById(R.id.et_search_box);
+
         mUrlDisplayTextView = (TextView) findViewById(R.id.tv_url_display);
         mSearchResultsTextView = (TextView) findViewById(R.id.tv_github_search_results_json);
 
-        // TODO (13) Get a reference to the error TextView using findViewById
         mErrorMessageTextView = (TextView) findViewById(R.id.tv_error_message_display);
-        // TODO (25) Get a reference to the ProgressBar using findViewById
         mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading_indicator);
     }
 
@@ -77,17 +64,17 @@ public class MainActivity1 extends AppCompatActivity {
      * our {@link GithubQueryTask}
      */
     private void makeGithubSearchQuery() {
-        String Query = mSearchBoxEditText.getText().toString();
-
-        //URL githubSearchUrl = NetworkUtils.buildUrl(githubQuery);
-        mUrlDisplayTextView.setText(srView.filterResult(Query));
-        //new GithubQueryTask().execute(githubSearchUrl);
+        String githubQuery = mSearchBoxEditText.getText().toString();
+        URL githubSearchUrl = NetworkUtils.buildUrl(githubQuery);
+        mUrlDisplayTextView.setText(githubSearchUrl.toString());
+        new GithubQueryTask().execute(githubSearchUrl);
     }
 
     private void showJsonDataView(){
         mErrorMessageTextView.setVisibility(View.INVISIBLE);
         mSearchResultsTextView.setVisibility(View.VISIBLE);
     }
+
     private void showErrorMessage(){
         mErrorMessageTextView.setVisibility(View.VISIBLE);
         mSearchResultsTextView.setVisibility(View.INVISIBLE);
@@ -98,7 +85,7 @@ public class MainActivity1 extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-            MainActivity1.this.mLoadingIndicator.setVisibility(View.VISIBLE);
+            MainActivity.this.mLoadingIndicator.setVisibility(View.VISIBLE);
             super.onPreExecute();
         }
 
@@ -116,17 +103,14 @@ public class MainActivity1 extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String githubSearchResults) {
-            // TODO (27) As soon as the loading is complete, hide the loading indicator
-            MainActivity1.this.mLoadingIndicator.setVisibility(View.INVISIBLE);
+            MainActivity.this.mLoadingIndicator.setVisibility(View.INVISIBLE);
             if (githubSearchResults != null && !githubSearchResults.equals("")) {
-                // TODO (17) Call showJsonDataView if we have valid, non-null results
                 mSearchResultsTextView.setText(githubSearchResults);
-                MainActivity1.this.showJsonDataView();
+                MainActivity.this.showJsonDataView();
             }
             else{
-                MainActivity1.this.showErrorMessage();
+                MainActivity.this.showErrorMessage();
             }
-            // TODO (16) Call showErrorMessage if the result is null in onPostExecute
         }
     }
 
