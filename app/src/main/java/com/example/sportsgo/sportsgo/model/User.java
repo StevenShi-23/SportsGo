@@ -1,4 +1,6 @@
-package com.example.sportsgo.sportsgo.utilities.Entity;
+package com.example.sportsgo.sportsgo.model;
+import com.example.sportsgo.sportsgo.model.Facility;
+
 import java.util.List;
 /**
  * This class stores information of users. For use in User Controller

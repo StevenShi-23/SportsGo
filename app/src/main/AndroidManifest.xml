@@ -18,7 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activities.MainActivity">
 
         </activity>
         <!--
@@ -34,7 +34,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".utilities.Boundary.CompleteView"
+            android:name=".Activities.CompleteView"
             android:label="@string/title_activity_complete_viw">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
