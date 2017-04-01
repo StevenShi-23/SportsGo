@@ -1,3 +1,7 @@
+/**
+ * Created by Long on 3/22/2017.
+ */
+//Logic for displaying CompleteView. Map implemented
 //Google map api key: AIzaSyDZfnfEjzu-9bBwswox4Q_DK_LefWnrd54
 package com.example.sportsgo.sportsgo.utilities.Boundary;
 

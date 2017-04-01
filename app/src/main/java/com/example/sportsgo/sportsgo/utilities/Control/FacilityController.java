@@ -1,6 +1,4 @@
-package com.example.sportsgo.sportsgo.utilities.Control;
-
-import com.example.sportsgo.sportsgo.utilities.Entity.Facility;
+package com.example.sportsgo.sportsgo;
 
 import java.io.BufferedReader;
 import java.net.URLConnection;
@@ -11,17 +9,9 @@ import java.net.URLConnection;
 import java.net.*;
 import java.io.*;
 
-/**
- * This class implements all the computations on Facility list
- * @author
- */
+//Facility Controller get facility list from database and return data for other class.
+
 public class FacilityController {
-    /**
-     * This method implements the logic of finding the all the facilities that
-     * has name containing keyword
-     * @param key
-     * @return
-     */
     public Facility[] GetMatchedFacilities(String key){
         URL query;
         URLConnection yc;
