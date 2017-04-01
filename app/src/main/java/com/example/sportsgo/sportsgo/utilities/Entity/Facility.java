@@ -4,11 +4,20 @@ package com.example.sportsgo.sportsgo.utilities.Entity;
  * This class implements the Facility entity with
  * the attribute description, name, weather_status, longtitude, latitude, temperature, id
  *
- * @author Long
+ * @author Long and Shi Ziji
  */
 
 public class Facility {
-    protected String description, name, weather_status;
-    protected double longitude, latitude, temperature;
-    protected int id;
+    protected String facilityDescription;
+    protected double longitude, latitude;
+    protected float temperature;
+    protected int facilityID;
+    protected int PSI;
+    // populariy is defined as the number of favourites, will use dummy data if favourite not implemented
+    protected int popularity;
+    protected float distance;
+    protected String facilityName;
+    protected String weather_status;
+
+
 }
