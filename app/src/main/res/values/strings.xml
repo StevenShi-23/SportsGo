@@ -18,7 +18,8 @@
     <string name="search">Search</string>
     <string name="nav_search">Search</string>
     <string name="nav_favourite">My Favourites</string>
-    <!--TODO (1) Add a string stating that an error has occurred-->
     <string name="error_message">Failed to get results, please try again</string>
     <string name="title_activity_complete_viw">Map</string>
+    <string name="drawer_open">Drawer open</string>
+    <string name="drawer_close">Drawer closed</string>
 </resources>

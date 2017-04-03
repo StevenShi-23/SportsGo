@@ -1,132 +1,155 @@
-/*
- * Copyright (C) 2016 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.example.sportsgo.sportsgo.Activities;
 
-import android.os.AsyncTask;
+/**
+ * Created by apple on 1/4/17.
+ */
+
+import android.Manifest;
+import android.app.FragmentManager;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.speech.RecognizerIntent;
+import android.support.annotation.NonNull;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Toast;
+import android.widget.ListView;
+import android.support.v4.widget.DrawerLayout;
+import com.hannesdorfmann.mosby.mvp.MvpActivity;
+import com.example.sportsgo.sportsgo.presenter.MainPresenter;
+import com.example.sportsgo.sportsgo.view.MainView;
 
+import java.util.List;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.example.sportsgo.sportsgo.R;
-import com.example.sportsgo.sportsgo.utilities.NetworkUtils;
 
-import java.io.IOException;
-import java.net.URL;
+import android.app.Fragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends MvpActivity<MainView, MainPresenter> implements MainView {
 
-    private EditText mSearchBoxEditText;
-
-    private TextView mUrlDisplayTextView;
-
-    private TextView mSearchResultsTextView;
-
-    private TextView mErrorMessageTextView;
-    private ProgressBar mLoadingIndicator;
+    private String[] navTitles;
+    private ListView mDrawerList;
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private CharSequence mTitle;
+    private CharSequence mDrawerTitle;
+    private String mActivityTitle;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("Start","Here");
-        setContentView(R.layout.activitiy_search);
+        setContentView(R.layout.main_navigation);
 
-        mSearchBoxEditText = (EditText) findViewById(R.id.et_search_box);
+        mTitle = mDrawerTitle = getTitle();
+        mActivityTitle = getTitle().toString();
+        navTitles = getResources().getStringArray(R.array.test_array);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        Log.d("Starts","Main activity");
+        // Set the adapter for the list view
+        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
+                R.layout.drawer_list_item, navTitles));
+        // Set the list's click listener
+        mDrawerList.setOnItemClickListener(presenter.getNewDrawerItemClickListener());
+        setupDrawer();
 
-        mUrlDisplayTextView = (TextView) findViewById(R.id.tv_url_display);
-        mSearchResultsTextView = (TextView) findViewById(R.id.tv_github_search_results_json);
+        if (savedInstanceState == null) {
+            selectItem(0);
+        }
+    }
+    private void setupDrawer() {
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
 
-        mErrorMessageTextView = (TextView) findViewById(R.id.tv_error_message_display);
-        mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading_indicator);
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                getSupportActionBar().setTitle("SportsGo Navigation");
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+
+            /** Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                getSupportActionBar().setTitle(mActivityTitle);
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+        };
+
+        mDrawerToggle.setDrawerIndicatorEnabled(true);
+        mDrawerLayout.addDrawerListener(mDrawerToggle);
     }
 
     /**
-     * This method retrieves the search text from the EditText, constructs the
-     * URL (using {@link NetworkUtils}) for the github repository you'd like to find, displays
-     * that URL in a TextView, and finally fires off an AsyncTask to perform the GET request using
-     * our {@link GithubQueryTask}
+     * Create the presenter corresponding to this activity class
+     *
+     * @return Constructed presenter
      */
-    private void makeGithubSearchQuery() {
-        String githubQuery = mSearchBoxEditText.getText().toString();
-        URL githubSearchUrl = NetworkUtils.buildUrl(githubQuery);
-        mUrlDisplayTextView.setText(githubSearchUrl.toString());
-        new GithubQueryTask().execute(githubSearchUrl);
-    }
-
-    private void showJsonDataView(){
-        mErrorMessageTextView.setVisibility(View.INVISIBLE);
-        mSearchResultsTextView.setVisibility(View.VISIBLE);
-    }
-
-    private void showErrorMessage(){
-        mErrorMessageTextView.setVisibility(View.VISIBLE);
-        mSearchResultsTextView.setVisibility(View.INVISIBLE);
-    }
-
-    public class GithubQueryTask extends AsyncTask<URL, Void, String> {
-
-
-        @Override
-        protected void onPreExecute() {
-            MainActivity.this.mLoadingIndicator.setVisibility(View.VISIBLE);
-            super.onPreExecute();
-        }
-
-        @Override
-        protected String doInBackground(URL... params) {
-            URL searchUrl = params[0];
-            String githubSearchResults = null;
-            try {
-                githubSearchResults = NetworkUtils.getResponseFromHttpUrl(searchUrl);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return githubSearchResults;
-        }
-
-        @Override
-        protected void onPostExecute(String githubSearchResults) {
-            MainActivity.this.mLoadingIndicator.setVisibility(View.INVISIBLE);
-            if (githubSearchResults != null && !githubSearchResults.equals("")) {
-                mSearchResultsTextView.setText(githubSearchResults);
-                MainActivity.this.showJsonDataView();
-            }
-            else{
-                MainActivity.this.showErrorMessage();
-            }
-        }
+    @NonNull
+    @Override
+    public MainPresenter createPresenter() {
+        return new MainPresenter();
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+    public void selectItem(int position) {
+        // Create a new fragment and specify the planet to show based on position
+        Fragment fragment = new BriefView();
+        Bundle args = new Bundle();
+        args.putInt("ARG_INDEX_NUMBER", position);
+        fragment.setArguments(args);
+
+        // Insert the fragment by replacing any existing fragment
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_frame, fragment)
+                .commit();
+
+        //getSupportActionBar().setTitle(navTitles[position]);
+        mActivityTitle = navTitles[position];
+        // Highlight the selected item, update the title, and close the drawer
+        mDrawerList.setItemChecked(position, true);
+        setTitle(navTitles[position]);
+        mDrawerLayout.closeDrawer(mDrawerList);
     }
+
+    @Override
+    public void setTitle(CharSequence title) {
+        mTitle = title;
+        //getActionBar().setTitle(mTitle);
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int itemThatWasClickedId = item.getItemId();
-        if (itemThatWasClickedId == R.id.action_search) {
-            makeGithubSearchQuery();
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        // Activate the navigation drawer toggle
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
+
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
     }
 }
