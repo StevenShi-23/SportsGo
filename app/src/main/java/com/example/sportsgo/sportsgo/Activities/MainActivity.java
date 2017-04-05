@@ -5,7 +5,6 @@ package com.example.sportsgo.sportsgo.Activities;
  */
 
 import android.Manifest;
-import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -23,6 +22,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 import android.widget.ListView;
 import android.support.v4.widget.DrawerLayout;
+
+import com.example.sportsgo.sportsgo.MyApp;
 import com.hannesdorfmann.mosby.mvp.MvpActivity;
 import com.example.sportsgo.sportsgo.presenter.MainPresenter;
 import com.example.sportsgo.sportsgo.view.MainView;
@@ -33,11 +34,12 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.example.sportsgo.sportsgo.R;
+import com.hannesdorfmann.mosby.mvp.MvpFragment;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 
 public class MainActivity extends MvpActivity<MainView, MainPresenter> implements MainView {
-
     private String[] navTitles;
     private ListView mDrawerList;
     private DrawerLayout mDrawerLayout;
@@ -49,25 +51,24 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_navigation);
-
         mTitle = mDrawerTitle = getTitle();
         mActivityTitle = getTitle().toString();
-        navTitles = getResources().getStringArray(R.array.test_array);
+        navTitles = getResources().getStringArray(R.array.nav_array);
+        mDrawerList = (ListView)findViewById(R.id.left_drawer);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         Log.d("Starts","Main activity");
         // Set the adapter for the list view
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
+        mDrawerList.setAdapter(new ArrayAdapter<String>(MyApp.getContext(),
                 R.layout.drawer_list_item, navTitles));
         // Set the list's click listener
         mDrawerList.setOnItemClickListener(presenter.getNewDrawerItemClickListener());
         setupDrawer();
 
-        if (savedInstanceState == null) {
-            selectItem(0);
-        }
+        //if (savedInstanceState == null) {
+        //    selectItem(0);
+        //}
     }
     private void setupDrawer() {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
@@ -105,13 +106,13 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
     @Override
     public void selectItem(int position) {
         // Create a new fragment and specify the planet to show based on position
-        Fragment fragment = new BriefView();
+        Fragment fragment = new BriefViewFragment();;
         Bundle args = new Bundle();
         args.putInt("ARG_INDEX_NUMBER", position);
         fragment.setArguments(args);
 
         // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.content_frame, fragment)
                 .commit();

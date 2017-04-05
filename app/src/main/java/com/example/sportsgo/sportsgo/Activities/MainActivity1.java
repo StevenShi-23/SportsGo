@@ -41,7 +41,7 @@ public class MainActivity1 extends AppCompatActivity {
 
     private TextView mSearchResultsTextView;
 
-    private SearchView srView;
+    private mSearchView srView;
 
     private WebView myBrowser;
     private TextView mErrorMessageTextView;
@@ -59,10 +59,10 @@ public class MainActivity1 extends AppCompatActivity {
 
         //myBrowser.getSettings().setJavaScriptEnabled(true);
         myBrowser.loadUrl("https://data.gov.sg/dataset/realtime-weather-readings/resource/17494bed-23e9-4b3b-ae89-232f87987163/view/81d91c06-158d-4f01-abd9-12108d954847");
-        srView = new SearchView();
+        srView = new mSearchView();
         mSearchBoxEditText = (EditText) findViewById(R.id.et_search_box);
         mUrlDisplayTextView = (TextView) findViewById(R.id.tv_url_display);
-        mSearchResultsTextView = (TextView) findViewById(R.id.tv_github_search_results_json);
+        mSearchResultsTextView = (TextView) findViewById(R.id.tv_online_search_results_json);
 
         // TODO (13) Get a reference to the error TextView using findViewById
         mErrorMessageTextView = (TextView) findViewById(R.id.tv_error_message_display);
@@ -72,16 +72,16 @@ public class MainActivity1 extends AppCompatActivity {
 
     /**
      * This method retrieves the search text from the EditText, constructs the
-     * URL (using {@link NetworkUtils}) for the github repository you'd like to find, displays
+     * URL (using {@link NetworkUtils}) for the Online repository you'd like to find, displays
      * that URL in a TextView, and finally fires off an AsyncTask to perform the GET request using
-     * our {@link GithubQueryTask}
+     * our {@link OnlineQueryTask}
      */
-    private void makeGithubSearchQuery() {
+    private void makeOnlineSearchQuery() {
         String Query = mSearchBoxEditText.getText().toString();
 
-        //URL githubSearchUrl = NetworkUtils.buildUrl(githubQuery);
+        //URL OnlineSearchUrl = NetworkUtils.buildUrl(OnlineQuery);
         mUrlDisplayTextView.setText(srView.filterResult(Query));
-        //new GithubQueryTask().execute(githubSearchUrl);
+        //new OnlineQueryTask().execute(OnlineSearchUrl);
     }
 
     private void showJsonDataView(){
@@ -93,7 +93,7 @@ public class MainActivity1 extends AppCompatActivity {
         mSearchResultsTextView.setVisibility(View.INVISIBLE);
     }
 
-    public class GithubQueryTask extends AsyncTask<URL, Void, String> {
+    public class OnlineQueryTask extends AsyncTask<URL, Void, String> {
 
 
         @Override
@@ -105,22 +105,22 @@ public class MainActivity1 extends AppCompatActivity {
         @Override
         protected String doInBackground(URL... params) {
             URL searchUrl = params[0];
-            String githubSearchResults = null;
+            String OnlineSearchResults = null;
             try {
-                githubSearchResults = NetworkUtils.getResponseFromHttpUrl(searchUrl);
+                OnlineSearchResults = NetworkUtils.getResponseFromHttpUrl(searchUrl);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return githubSearchResults;
+            return OnlineSearchResults;
         }
 
         @Override
-        protected void onPostExecute(String githubSearchResults) {
+        protected void onPostExecute(String OnlineSearchResults) {
             // TODO (27) As soon as the loading is complete, hide the loading indicator
             MainActivity1.this.mLoadingIndicator.setVisibility(View.INVISIBLE);
-            if (githubSearchResults != null && !githubSearchResults.equals("")) {
+            if (OnlineSearchResults != null && !OnlineSearchResults.equals("")) {
                 // TODO (17) Call showJsonDataView if we have valid, non-null results
-                mSearchResultsTextView.setText(githubSearchResults);
+                mSearchResultsTextView.setText(OnlineSearchResults);
                 MainActivity1.this.showJsonDataView();
             }
             else{
@@ -140,7 +140,7 @@ public class MainActivity1 extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemThatWasClickedId = item.getItemId();
         if (itemThatWasClickedId == R.id.action_search) {
-            makeGithubSearchQuery();
+            makeOnlineSearchQuery();
             return true;
         }
         return super.onOptionsItemSelected(item);

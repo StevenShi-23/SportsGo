@@ -19,7 +19,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.android.sportgo.MainActivity">
+    tools:context="com.example.sportsgo.sportsgo.Activities.MainActivity1">
 
     <EditText
         android:id="@+id/et_search_box"
@@ -47,7 +47,7 @@
             android:layout_marginTop="16dp">
 
             <TextView
-                android:id="@+id/tv_github_search_results_json"
+                android:id="@+id/tv_online_search_results_json"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Make a search!"

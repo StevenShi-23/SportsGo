@@ -15,7 +15,8 @@
 -->
 <resources>
     <string name="app_name">SportsGO</string>
-    <string name="search">Search</string>
+    <string name="search_title">Search Facilities</string>
+    <string name="search_hint">Search Hints here</string>
     <string name="nav_search">Search</string>
     <string name="nav_favourite">My Favourites</string>
     <string name="error_message">Failed to get results, please try again</string>

@@ -17,6 +17,7 @@ import android.widget.Toast;
 import android.widget.ListView;
 import android.support.v4.widget.DrawerLayout;
 
+import com.example.sportsgo.sportsgo.Activities.BriefViewFragment;
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.example.sportsgo.sportsgo.view.MainView;
 

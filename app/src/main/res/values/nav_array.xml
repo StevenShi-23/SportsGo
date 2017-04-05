@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array
-        name="test_array">
+        name="nav_array">
         <item>Search Facility</item>
         <item>Favorites Facility</item>
         <item>Logout</item>
