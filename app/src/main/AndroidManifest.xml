@@ -47,9 +47,7 @@
         <activity
             android:name=".Activities.CompleteView"
             android:label="@string/title_activity_complete_viw">
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
+
         </activity>
 
     </application>

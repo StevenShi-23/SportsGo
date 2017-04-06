@@ -8,12 +8,14 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -21,9 +23,13 @@ import android.widget.ListView;
 import com.example.sportsgo.sportsgo.MyApp;
 import com.example.sportsgo.sportsgo.R;
 import com.example.sportsgo.sportsgo.model.Facility;
+import com.example.sportsgo.sportsgo.model.FacilityList;
 import com.example.sportsgo.sportsgo.presenter.BriefViewPresenter;
+import com.example.sportsgo.sportsgo.utilities.ListAdapter;
 import com.example.sportsgo.sportsgo.view.BriefView;
 import com.hannesdorfmann.mosby.mvp.MvpFragment;
+
+import java.util.ArrayList;
 
 /**
  * Created by StevenShi on 22/3/17.
@@ -31,8 +37,8 @@ import com.hannesdorfmann.mosby.mvp.MvpFragment;
 
 public class BriefViewFragment extends MvpFragment<BriefView, BriefViewPresenter> implements BriefView {
     private EditText mSearchBoxEditText;
-    private ListView mList;
-    private ArrayAdapter mAdapter;
+    private ListView mListView;
+    private ListAdapter mAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         super.onCreateView(inflater, parent, savedInstanceState);
@@ -44,10 +50,20 @@ public class BriefViewFragment extends MvpFragment<BriefView, BriefViewPresenter
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstance) {
         super.onViewCreated(view, savedInstance);
-        mAdapter = new ArrayAdapter<Facility>(MyApp.getContext(),
-                R.layout.drawer_list_item);
-        mList = (ListView) getView().findViewById(R.id.brief_list);
+        ArrayList<Facility> arrayOfFacilities = new ArrayList<Facility>();
+        mAdapter = new ListAdapter(MyApp.getContext(), arrayOfFacilities);
+        mListView = (ListView) getView().findViewById(R.id.brief_list);
+        mListView.setAdapter(mAdapter);
         presenter.getAdapter(mAdapter);
+        mListView.setOnItemClickListener(new ListItemClickListener());
+    }
+    private class ListItemClickListener implements ListView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Facility facility = mAdapter.getItem(position);
+            Log.d("OnItemClick","In BriefViewFragment");
+            ((MainActivity)getActivity()).enterCompleteView(facility);
+        }
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -66,13 +82,13 @@ public class BriefViewFragment extends MvpFragment<BriefView, BriefViewPresenter
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                System.out.println("search query submit");
+                Log.d("search query submit","");
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                System.out.println("tap");
+                Log.d("tap","");
                 return false;
             }
         });

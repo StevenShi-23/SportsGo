@@ -8,16 +8,16 @@ package com.example.sportsgo.sportsgo.model;
  */
 
 public class Facility {
-    protected String facilityDescription;
-    protected double longitude, latitude;
-    protected double temperature;
-    protected int facilityID;
-    protected int PSI;
+    public String facilityDescription;
+    public double longitude, latitude;
+    public double temperature;
+    public int facilityID;
+    public int PSI;
     // populariy is defined as the number of favourites, will use dummy data if favourite not implemented
-    protected int popularity;
-    protected double distance;
-    protected String facilityName;
-    protected String weather_status;
+    public int popularity;
+    public double distance;
+    public String facilityName;
+    public String weather_status;
     public Facility(int id, String name, double longitude, double latitude, String description, double temperature, String weather_status){
         this.facilityID = id;
         this.facilityName = name;

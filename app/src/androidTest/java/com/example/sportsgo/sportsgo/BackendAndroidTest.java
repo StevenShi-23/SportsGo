@@ -8,6 +8,7 @@ import android.test.ActivityUnitTestCase;
 import android.util.Log;
 
 import com.example.sportsgo.sportsgo.model.Facility;
+import com.example.sportsgo.sportsgo.model.FacilityList;
 import com.example.sportsgo.sportsgo.utilities.NetworkUtils;
 
 import org.json.JSONArray;
@@ -39,7 +40,7 @@ public class BackendAndroidTest {
         Log.d("Backend TEST:", " starts");
         Log.d("Backend TEST:", facility_json);
         JSONArray facilities_array = new JSONArray(facility_json);
-        List<Facility> Facility_list = new ArrayList<Facility>();
+        ArrayList<Facility> Facility_list = new ArrayList<Facility>();
         for (int i = 0; i < facilities_array.length(); i++) {
             JSONObject jsonobject = facilities_array.getJSONObject(i);
             String description = jsonobject.getString("description");
@@ -51,7 +52,7 @@ public class BackendAndroidTest {
             String name = jsonobject.getString("name");
             Facility_list.add(new Facility(id, name, longitude, latitude, description, temperature, weather_status));
         }
-
+        FacilityList.getInstance().set_all_facilities(Facility_list);
         Log.d("Backend TEST:", " ends");
     }
 

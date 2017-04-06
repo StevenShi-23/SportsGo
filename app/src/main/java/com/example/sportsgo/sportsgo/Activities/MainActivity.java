@@ -24,7 +24,9 @@ import android.widget.ListView;
 import android.support.v4.widget.DrawerLayout;
 
 import com.example.sportsgo.sportsgo.MyApp;
+import com.example.sportsgo.sportsgo.model.Facility;
 import com.example.sportsgo.sportsgo.utilities.RefreshService;
+import com.example.sportsgo.sportsgo.Activities.CompleteViewFragment;
 import com.hannesdorfmann.mosby.mvp.MvpActivity;
 import com.example.sportsgo.sportsgo.presenter.MainPresenter;
 import com.example.sportsgo.sportsgo.view.MainView;
@@ -125,6 +127,19 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
         setTitle(navTitles[position]);
         mDrawerLayout.closeDrawer(mDrawerList);
     }
+
+    public void enterCompleteView(Facility facility){
+        CompleteViewFragment completev = new CompleteViewFragment();
+        completev.setFacility(facility);
+        Bundle args = new Bundle();
+        // Insert the fragment by replacing any existing fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_frame, completev)
+                .addToBackStack(null)
+                .commit();
+    }
+
 
     @Override
     public void setTitle(CharSequence title) {
