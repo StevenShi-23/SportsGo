@@ -16,6 +16,7 @@
 package com.example.sportsgo.sportsgo.utilities;
 
 import android.net.Uri;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,14 +34,7 @@ public class NetworkUtils {
             "http://sports-go.cloudapp.net";
 
     final static String PARAM_QUERY = "q";
-
-    /*
-     * The sort field. One of stars, forks, or updated.
-     * Default: results are sorted by best match if no field is specified.
-     */
-    final static String PARAM_SORT = "sort";
-    final static String sortBy = "stars";
-    final static String hello = "hello";
+    final static String ALL_FACILITY = "";
     /**
      * Builds the URL used to query backend.
      *
@@ -49,7 +43,7 @@ public class NetworkUtils {
      */
     public static URL buildUrl(String backendSearchQuery) {
         Uri builtUri = Uri.parse(BACKEND_BASE_URL).buildUpon()
-                //.appendPath(hello)
+                .appendPath(backendSearchQuery)
                 //.appendQueryParameter(PARAM_QUERY, backendSearchQuery)
                 //.appendQueryParameter(PARAM_SORT, sortBy)
                 .build();
@@ -88,5 +82,16 @@ public class NetworkUtils {
         } finally {
             urlConnection.disconnect();
         }
+    }
+    public static String getAllFacilities()  {
+        URL url = buildUrl(ALL_FACILITY);
+        String result = null;
+        try{
+            result = getResponseFromHttpUrl(url);
+        }
+        catch(IOException e){
+            Log.d("getAllFacilities", "IOException");
+        }
+        return result;
     }
 }

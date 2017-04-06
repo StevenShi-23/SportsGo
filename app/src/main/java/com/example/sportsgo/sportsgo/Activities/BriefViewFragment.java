@@ -2,6 +2,7 @@ package com.example.sportsgo.sportsgo.Activities;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.MenuItemCompat;
@@ -53,13 +54,13 @@ public class BriefViewFragment extends MvpFragment<BriefView, BriefViewPresenter
         inflater.inflate(R.menu.search_field, menu);
         MenuItem item = menu.findItem(R.id.search);
         SearchView sv = new SearchView(((MainActivity)getActivity()).getSupportActionBar().getThemedContext());
-        //item.expandActionView();
-            //sv.setIconified(false);
+        sv.setIconified(false);
+        Resources res = getResources();
+        String default_message = res.getString(R.string.search_default);
+        sv.setQuery(default_message, false); // fill in the search term by default
+        sv.clearFocus(); // close the keyboard on load
         MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
         MenuItemCompat.setActionView(item, sv);
-        //final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.search));
-        //searchView.setIconified(false);
-        //searchView.clearFocus();
 
         //MenuItemCompat.expandActionView(item);
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

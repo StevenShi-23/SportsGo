@@ -24,6 +24,7 @@ import android.widget.ListView;
 import android.support.v4.widget.DrawerLayout;
 
 import com.example.sportsgo.sportsgo.MyApp;
+import com.example.sportsgo.sportsgo.utilities.RefreshService;
 import com.hannesdorfmann.mosby.mvp.MvpActivity;
 import com.example.sportsgo.sportsgo.presenter.MainPresenter;
 import com.example.sportsgo.sportsgo.view.MainView;
@@ -65,7 +66,7 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
         // Set the list's click listener
         mDrawerList.setOnItemClickListener(presenter.getNewDrawerItemClickListener());
         setupDrawer();
-
+        startService(new Intent(MyApp.getContext(), RefreshService.class));
         //if (savedInstanceState == null) {
         //    selectItem(0);
         //}
