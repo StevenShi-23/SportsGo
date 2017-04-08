@@ -8,7 +8,7 @@ import com.example.sportsgo.sportsgo.model.Facility;
  * @author Long
  */
 
-public class SearchView {
+public class mSearchView {
     private SearchController schctrl;
     private Facility[] Facilities;
     private String kw;
@@ -16,7 +16,7 @@ public class SearchView {
     /**
      * constructor
      */
-    public SearchView(){
+    public mSearchView(){
         schctrl = new SearchController();
         kw = "";
         Facilities = new Facility[3];
