@@ -1,4 +1,4 @@
-package com.example.sportsgo.sportsgo.Activities;
+package com.example.sportsgo.sportsgo.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,13 +9,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.sportsgo.sportsgo.Activities.MainActivity;
 import com.example.sportsgo.sportsgo.MyApp;
 import com.example.sportsgo.sportsgo.R;
 import com.example.sportsgo.sportsgo.model.Facility;
-import com.example.sportsgo.sportsgo.presenter.BriefViewPresenter;
 import com.example.sportsgo.sportsgo.presenter.FavoriteListPresenter;
 import com.example.sportsgo.sportsgo.utilities.ListAdapter;
-import com.example.sportsgo.sportsgo.view.BriefView;
 import com.example.sportsgo.sportsgo.view.FavoriteListView;
 import com.hannesdorfmann.mosby.mvp.MvpFragment;
 
