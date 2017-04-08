@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void login() {
-        Log.d(TAG, "Login here");
+        Log.d(TAG, "Logi n here");
 
         if (!validate()) {
             onLoginFailed();
