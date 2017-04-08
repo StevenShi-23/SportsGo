@@ -53,7 +53,9 @@
 
     <Button
         android:id="@+id/delete_button"
-        android:visibility="visible"
+        android:visibility="invisible"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
