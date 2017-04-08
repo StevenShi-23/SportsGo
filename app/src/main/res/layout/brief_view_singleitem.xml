@@ -47,7 +47,7 @@
             android:gravity="center"
             android:layout_height="wrap_content"
             android:text="temp: 30 C"
-            android:textSize="7pt"
+            android:textSize="6pt"
             />
         <TextView
             android:id="@+id/single_brief_psi"
@@ -56,7 +56,7 @@
             android:gravity="center"
             android:layout_height="wrap_content"
             android:text="PSI: 90"
-            android:textSize="7pt"></TextView>
+            android:textSize="6pt"></TextView>
 
     </LinearLayout>
 
