@@ -9,65 +9,37 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme" />
-
         <GridLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/Back"
                 style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="78dp"
-                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:onClick="onBackPressed()"
                 android:text="Back"
                 android:textColor="#FFFFFF" />
 
             <TextView
                 android:id="@+id/FacName"
-                android:layout_width="237dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="0.8"
                 android:text="Id = FacName"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:layout_width="209dp" />
+
+            <Button
+                android:id="@+id/Add"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_weight="0.2"
+                android:text="+"
+                android:textColor="#FFFFFF" />
         </GridLayout>
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tabs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <android.support.design.widget.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:icon="@android:drawable/ic_menu_info_details" />
-
-            <android.support.design.widget.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:icon="@android:drawable/ic_menu_directions" />
-
-            <android.support.design.widget.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:icon="@android:drawable/stat_sys_phone_call" />
-
-            <android.support.design.widget.TabItem
-                android:id="@+id/tabItem"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:icon="@android:drawable/btn_star" />
-        </android.support.design.widget.TabLayout>
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.NestedScrollView
@@ -89,7 +61,7 @@
 
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/FacName2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -111,32 +83,35 @@
                 <TextView
                     android:id="@+id/Descript"
                     android:layout_width="215dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="270dp"
                     android:layout_column="12"
                     android:layout_row="0"
                     android:text="ID = Descript" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="166dp"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:weightSum="1">
 
-                    <ImageView
-                        android:id="@+id/imageView2"
-                        android:layout_width="198dp"
-                        android:layout_height="89dp"
-                        android:layout_weight="0.25"
-                        android:scaleType="center"
-                        android:visibility="visible"
-                        map:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
+                    <TextView
+                        android:id="@+id/Temperature"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="ID = WeatherInfo" />
 
                     <TextView
-                        android:id="@+id/WeatherInfo"
-                        android:layout_width="203dp"
+                        android:id="@+id/PSI"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.55"
                         android:text="ID = WeatherInfo" />
+
+                    <TextView
+                        android:id="@+id/weather_status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="ID = WeatherInfo" />
+
                 </LinearLayout>
 
             </GridLayout>

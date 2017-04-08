@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.sportsgo.sportsgo.MyApp;
 import com.example.sportsgo.sportsgo.R;
@@ -31,6 +33,9 @@ public class CompleteViewFragment extends MvpFragment<CompleteView1, CompleteVie
     private GoogleMap mMap;
     private Facility mfacility;
 
+    TextView FacName, FacName2, Descript, weather_status, PSI, temperature;
+    Button Back, Add;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         super.onCreateView(inflater, parent, savedInstanceState);
@@ -47,6 +52,19 @@ public class CompleteViewFragment extends MvpFragment<CompleteView1, CompleteVie
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstance) {
         super.onViewCreated(view, savedInstance);
+        FacName = (TextView) view.findViewById(R.id.FacName);
+        FacName.setText(mfacility.facilityName);
+        FacName2 = (TextView) view.findViewById(R.id.FacName2);
+        FacName2.setText(mfacility.facilityName);
+        Descript = (TextView) view.findViewById(R.id.Descript);
+        Descript.setText(mfacility.facilityDescription);
+        temperature = (TextView) view.findViewById(R.id.Temperature);
+        temperature.setText("Temperature: " + mfacility.temperature);
+        PSI = (TextView) view.findViewById(R.id.Temperature);
+        PSI.setText("PSI index: " + mfacility.PSI);
+        weather_status = (TextView) view.findViewById(R.id.weather_status);
+        weather_status.setText("Weather status: " + mfacility.weather_status);
+
         mapView = (MapView) view.findViewById(R.id.map);
         mapView.onCreate(savedInstance);
         mapView.onResume();
@@ -57,7 +75,7 @@ public class CompleteViewFragment extends MvpFragment<CompleteView1, CompleteVie
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
      * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
+     * we just add a marker near flocation, Australia.
      * If Google Play services is not installed on the device, the user will be prompted to install
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
@@ -67,10 +85,12 @@ public class CompleteViewFragment extends MvpFragment<CompleteView1, CompleteVie
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        // Add a marker in flocation and move the camera
+        LatLng flocation = new LatLng(mfacility.latitude, mfacility.longitude);
+        mMap.addMarker(new MarkerOptions().position(flocation).title("Marker in flocation"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(flocation));
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(15));
+        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
     }
 
     @Override
