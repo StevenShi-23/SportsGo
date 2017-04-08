@@ -49,7 +49,7 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     public void signup() {
-        Log.d(TAG, "Signup");
+        Log.d(TAG, "Sig nup");
 
         if (!validate()) {
             onSignupFailed();
