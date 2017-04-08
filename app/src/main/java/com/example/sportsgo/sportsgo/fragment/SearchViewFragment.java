@@ -1,4 +1,4 @@
-package com.example.sportsgo.sportsgo.Activities;
+package com.example.sportsgo.sportsgo.fragment;
 
 import android.app.SearchManager;
 import android.content.Context;
@@ -20,13 +20,14 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.example.sportsgo.sportsgo.Activities.MainActivity;
 import com.example.sportsgo.sportsgo.MyApp;
 import com.example.sportsgo.sportsgo.R;
 import com.example.sportsgo.sportsgo.model.Facility;
 import com.example.sportsgo.sportsgo.model.FacilityList;
-import com.example.sportsgo.sportsgo.presenter.BriefViewPresenter;
+import com.example.sportsgo.sportsgo.presenter.SearchViewPresenter;
 import com.example.sportsgo.sportsgo.utilities.ListAdapter;
-import com.example.sportsgo.sportsgo.view.BriefView;
+import com.example.sportsgo.sportsgo.view.mSearchView;
 import com.hannesdorfmann.mosby.mvp.MvpFragment;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ import java.util.ArrayList;
  * Created by StevenShi on 22/3/17.
  */
 
-public class BriefViewFragment extends MvpFragment<BriefView, BriefViewPresenter> implements BriefView {
+public class SearchViewFragment extends MvpFragment<mSearchView, SearchViewPresenter> implements mSearchView {
     private EditText mSearchBoxEditText;
     private ListView mListView;
     private ListAdapter mAdapter;
@@ -94,8 +95,8 @@ public class BriefViewFragment extends MvpFragment<BriefView, BriefViewPresenter
         });
     }
     @Override
-    public BriefViewPresenter createPresenter(){
-        return new BriefViewPresenter();
+    public SearchViewPresenter createPresenter(){
+        return new SearchViewPresenter();
     }
 
 }

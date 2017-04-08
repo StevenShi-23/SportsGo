@@ -4,40 +4,27 @@ package com.example.sportsgo.sportsgo.Activities;
  * Created by apple on 1/4/17.
  */
 
-import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.speech.RecognizerIntent;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
 import android.widget.ListView;
 import android.support.v4.widget.DrawerLayout;
 
 import com.example.sportsgo.sportsgo.MyApp;
+import com.example.sportsgo.sportsgo.fragment.SearchViewFragment;
 import com.example.sportsgo.sportsgo.model.Facility;
 import com.example.sportsgo.sportsgo.utilities.RefreshService;
-import com.example.sportsgo.sportsgo.Activities.CompleteViewFragment;
+import com.example.sportsgo.sportsgo.fragment.CompleteViewFragment;
 import com.hannesdorfmann.mosby.mvp.MvpActivity;
 import com.example.sportsgo.sportsgo.presenter.MainPresenter;
 import com.example.sportsgo.sportsgo.view.MainView;
 
-import java.util.List;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import com.example.sportsgo.sportsgo.R;
-import com.hannesdorfmann.mosby.mvp.MvpFragment;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -109,7 +96,7 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
     @Override
     public void selectItem(int position) {
         // Create a new fragment and specify the planet to show based on position
-        Fragment fragment = new BriefViewFragment();;
+        Fragment fragment = new SearchViewFragment();;
         Bundle args = new Bundle();
         args.putInt("ARG_INDEX_NUMBER", position);
         fragment.setArguments(args);
