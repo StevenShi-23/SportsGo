@@ -40,6 +40,16 @@
             android:scaleType="fitXY"
             android:src="@drawable/sunny_icon" />
         <TextView
+            android:id="@+id/single_brief_temperature"
+            android:layout_marginTop="6dp"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:text="temp: 30 C"
+            android:textSize="7pt"
+            />
+        <TextView
             android:id="@+id/single_brief_psi"
             android:layout_marginTop="6dp"
             android:layout_width="wrap_content"
