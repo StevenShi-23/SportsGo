@@ -25,7 +25,7 @@
         android:textSize="9pt"
         />
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginLeft="18dp"
         android:orientation="vertical">
@@ -42,12 +42,21 @@
         <TextView
             android:id="@+id/single_brief_psi"
             android:layout_marginTop="6dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
             android:gravity="center"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="PSI: 90"
             android:textSize="7pt"
             />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/delete_button"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    </Button>
 
 </LinearLayout>
