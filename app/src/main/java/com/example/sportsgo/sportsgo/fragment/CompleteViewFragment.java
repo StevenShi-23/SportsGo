@@ -2,6 +2,7 @@ package com.example.sportsgo.sportsgo.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +10,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.sportsgo.sportsgo.Activities.MainActivity;
 import com.example.sportsgo.sportsgo.MyApp;
+import com.example.sportsgo.sportsgo.model.FavoriteList;
 import com.example.sportsgo.sportsgo.R;
 import com.example.sportsgo.sportsgo.model.Facility;
 import com.example.sportsgo.sportsgo.presenter.CompleteViewPresenter;
@@ -65,10 +68,29 @@ public class CompleteViewFragment extends MvpFragment<CompleteView1, CompleteVie
         weather_status = (TextView) view.findViewById(R.id.weather_status);
         weather_status.setText("Weather status: " + mfacility.weather_status);
 
+        Back = (Button) view.findViewById(R.id.Back);
+        Back.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
+
+        Add = (Button) view.findViewById(R.id.Add);
+        Add.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                FavoriteList.getInstance().addToFavoriteList(mfacility);
+            }
+        });
+
         mapView = (MapView) view.findViewById(R.id.map);
         mapView.onCreate(savedInstance);
         mapView.onResume();
         mapView.getMapAsync(this);
+
     }
 
     /**
