@@ -28,7 +28,7 @@ import static com.example.sportsgo.sportsgo.utilities.NetworkUtils.getAllFacilit
 
 public class RefreshService extends Service {
     // constant
-    public static final long NOTIFY_INTERVAL = 60 * 1000; // 10 seconds
+    public static final long NOTIFY_INTERVAL = 60 * 1000; // 60 seconds
 
     // run on another Thread to avoid crash
     private Handler mHandler = new Handler();

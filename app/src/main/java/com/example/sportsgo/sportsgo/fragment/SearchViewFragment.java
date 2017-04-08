@@ -84,6 +84,7 @@ public class SearchViewFragment extends MvpFragment<mSearchView, SearchViewPrese
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Log.d("search query submit","");
+                presenter.update("search_keywords", query);
                 return false;
             }
 
