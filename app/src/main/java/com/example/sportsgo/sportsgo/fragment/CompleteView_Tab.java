@@ -1,4 +1,4 @@
-package com.example.sportsgo.sportsgo.Activities;
+package com.example.sportsgo.sportsgo.fragment;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;

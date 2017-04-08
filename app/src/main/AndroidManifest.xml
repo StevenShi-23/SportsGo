@@ -39,7 +39,7 @@
         <activity
             android:name=".Activities.CompleteView"
             android:label="@string/title_activity_complete_viw" />
-        <activity android:name=".Activities.CompleteView_Tab"
+        <activity android:name=".fragment.CompleteView_Tab"
             android:theme="@style/MyMaterialTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

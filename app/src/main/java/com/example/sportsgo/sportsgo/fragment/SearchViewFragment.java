@@ -1,4 +1,4 @@
-package com.example.sportsgo.sportsgo.Activities;
+package com.example.sportsgo.sportsgo.fragment;
 
 import android.app.SearchManager;
 import android.content.Context;
@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.example.sportsgo.sportsgo.Activities.MainActivity;
 import com.example.sportsgo.sportsgo.MyApp;
 import com.example.sportsgo.sportsgo.R;
 import com.example.sportsgo.sportsgo.model.Facility;
