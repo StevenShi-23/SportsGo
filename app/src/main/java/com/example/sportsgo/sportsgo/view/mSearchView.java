@@ -6,6 +6,6 @@ import com.hannesdorfmann.mosby.mvp.MvpView;
  * Created by apple on 4/4/17.
  */
 
-public interface BriefView extends MvpView {
+public interface mSearchView extends MvpView {
 
 }
