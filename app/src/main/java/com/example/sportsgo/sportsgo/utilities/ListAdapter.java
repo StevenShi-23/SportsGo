@@ -29,14 +29,14 @@ public class ListAdapter extends ArrayAdapter<Facility> {
         Facility facility = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.brief_view_item, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.brief_view_singleitem, parent, false);
         }
         // Lookup view for data population
-        TextView fName = (TextView) convertView.findViewById(R.id.fName);
-        TextView fWeather = (TextView) convertView.findViewById(R.id.fWeather);
+        TextView fName = (TextView) convertView.findViewById(R.id.single_brief_name);
+        //TextView fWeather = (TextView) convertView.findViewById(R.id.fWeather);
         // Populate the data into the template view using the data object
         fName.setText(facility.facilityName);
-        fWeather.setText(facility.weather_status);
+        //fWeather.setText(facility.weather_status);
         // Return the completed view to render on screen
         return convertView;
     }

@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.support.v4.widget.DrawerLayout;
 
 import com.example.sportsgo.sportsgo.MyApp;
+import com.example.sportsgo.sportsgo.fragment.FavoriteListFragment;
 import com.example.sportsgo.sportsgo.fragment.SearchViewFragment;
 import com.example.sportsgo.sportsgo.model.Facility;
 import com.example.sportsgo.sportsgo.utilities.RefreshService;
@@ -96,7 +97,18 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
     @Override
     public void selectItem(int position) {
         // Create a new fragment and specify the planet to show based on position
-        Fragment fragment = new SearchViewFragment();;
+        Fragment fragment = null;
+        if(position == 0){
+            fragment = new SearchViewFragment();
+        }
+        else if(position == 1){
+            fragment = new FavoriteListFragment();
+        }
+        else if(position == 2){
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        }
         Bundle args = new Bundle();
         args.putInt("ARG_INDEX_NUMBER", position);
         fragment.setArguments(args);

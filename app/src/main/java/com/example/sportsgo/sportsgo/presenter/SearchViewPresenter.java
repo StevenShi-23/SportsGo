@@ -18,6 +18,7 @@ import java.util.List;
 public class SearchViewPresenter extends MvpBasePresenter<mSearchView> {
     private ListAdapter mAdapter;
     private String sort_option = "", filter_option = "", search_keywords = "";
+    private String DEFAULT_KEYWORD = "all facilities";
     public SearchViewPresenter(){
 
     }
@@ -43,7 +44,7 @@ public class SearchViewPresenter extends MvpBasePresenter<mSearchView> {
     }
     private void perform_search(){
         List<Facility> facilities = FacilityList.getInstance().get_all_facilities();
-        facilities = ExactSearch.exact_search(search_keywords, facilities);
+        facilities = ExactSearch.exact_search(search_keywords, facilities, DEFAULT_KEYWORD);
         //TODO filter strategy && sort strategy
         mAdapter.clear();
         mAdapter.addAll(facilities);
