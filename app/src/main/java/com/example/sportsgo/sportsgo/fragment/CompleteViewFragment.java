@@ -109,9 +109,10 @@ public class CompleteViewFragment extends MvpFragment<CompleteView1, CompleteVie
 
         // Add a marker in flocation and move the camera
         LatLng flocation = new LatLng(mfacility.latitude, mfacility.longitude);
-        mMap.addMarker(new MarkerOptions().position(flocation).title("Marker in flocation"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(flocation));
-        mMap.moveCamera(CameraUpdateFactory.zoomTo(15));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(flocation));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(flocation,17));
+        boolean b = true;
+        mMap.addMarker(new MarkerOptions().position(flocation).title("flocation"));
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
     }
 
