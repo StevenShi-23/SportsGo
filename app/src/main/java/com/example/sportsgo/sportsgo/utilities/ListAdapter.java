@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.sportsgo.sportsgo.R;
@@ -33,10 +34,20 @@ public class ListAdapter extends ArrayAdapter<Facility> {
         }
         // Lookup view for data population
         TextView fName = (TextView) convertView.findViewById(R.id.single_brief_name);
-        //TextView fWeather = (TextView) convertView.findViewById(R.id.fWeather);
+        TextView fTemp = (TextView) convertView.findViewById(R.id.single_brief_temperature);
+        ImageView wIcon = (ImageView) convertView.findViewById(R.id.single_brief_weather_icon);
+        if(facility.weather_status.toLowerCase().contains("cloudy".toLowerCase())){
+            wIcon.setImageResource(R.drawable.cloud_icon);
+        }
+        else if(facility.weather_status.toLowerCase().contains("rain".toLowerCase())){
+            wIcon.setImageResource(R.drawable.rain_icon);
+        }
+        else{
+            wIcon.setImageResource(R.drawable.sunny_icon);
+        }
         // Populate the data into the template view using the data object
         fName.setText(facility.facilityName);
-        //fWeather.setText(facility.weather_status);
+        fTemp.setText(String.format( "%.1f", facility.temperature )+ (char) 0x00B0);
         // Return the completed view to render on screen
         return convertView;
     }
