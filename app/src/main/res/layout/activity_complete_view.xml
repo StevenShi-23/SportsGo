@@ -20,18 +20,8 @@
                 android:onClick="onBackPressed()"
                 android:text="Back"
                 android:textColor="#FFFFFF"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:layout_width="64dp" />
-
-            <TextView
-                android:id="@+id/FacName"
-                android:layout_height="match_parent"
-                android:layout_weight="0.8"
-                android:text="Id = FacNfffdssaggrefwsreagfdsgdgaegrame"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="10pt"
-                android:layout_width="209dp" />
 
             <ImageButton
                 android:id="@+id/Add"
@@ -54,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            tools:context="com.example.sportsgo.sportsgo.Activities.CompleteView">
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -64,7 +54,7 @@
 
 
                 <TextView
-                    android:id="@+id/FacName2"
+                    android:id="@+id/FacName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

@@ -59,13 +59,11 @@ public class CompleteViewFragment extends MvpFragment<CompleteView1, CompleteVie
         super.onViewCreated(view, savedInstance);
         FacName = (TextView) view.findViewById(R.id.FacName);
         FacName.setText(mfacility.facilityName);
-        FacName2 = (TextView) view.findViewById(R.id.FacName2);
-        FacName2.setText(mfacility.facilityName);
         Descript = (TextView) view.findViewById(R.id.Descript);
         Descript.setText(mfacility.facilityDescription);
         temperature = (TextView) view.findViewById(R.id.Temperature);
         temperature.setText("Temperature: " + mfacility.temperature);
-        PSI = (TextView) view.findViewById(R.id.Temperature);
+        PSI = (TextView) view.findViewById(R.id.PSI);
         PSI.setText("PSI index: " + mfacility.PSI);
         weather_status = (TextView) view.findViewById(R.id.weather_status);
         weather_status.setText("Weather status: " + mfacility.weather_status);
@@ -81,9 +79,9 @@ public class CompleteViewFragment extends MvpFragment<CompleteView1, CompleteVie
 
         Add = (ImageButton) view.findViewById(R.id.Add);
         if(FavoriteList.getInstance().inFavoriteList(mfacility)){
-            Add.setImageResource(R.drawable.heart_uncheck);
+            Add.setImageResource(R.drawable.like_red);
         }
-        else Add.setImageResource(R.drawable.ic_menu_camera);
+        else Add.setImageResource(R.drawable.heart_uncheck);
 
         Add.setOnClickListener(new View.OnClickListener() {
 
@@ -95,7 +93,7 @@ public class CompleteViewFragment extends MvpFragment<CompleteView1, CompleteVie
                 }
                 else{
                     FavoriteList.getInstance().addToFavoriteList(mfacility);
-                    Add.setImageResource(R.drawable.ic_menu_camera);
+                    Add.setImageResource(R.drawable.like_red);
                 }
             }
         });

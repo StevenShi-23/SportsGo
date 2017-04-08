@@ -60,7 +60,7 @@
 
     </LinearLayout>
 
-    <!--Button
+    <Button
         android:id="@+id/delete_button"
         android:visibility="invisible"
         android:focusable="false"
@@ -68,6 +68,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-    </Button-->
+    </Button>
 
 </LinearLayout>
