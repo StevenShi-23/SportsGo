@@ -20,7 +20,7 @@
                 android:onClick="onBackPressed()"
                 android:text="Back"
                 android:textColor="#FFFFFF"
-                android:textsize="20sp"
+                android:textSize="20sp"
                 android:layout_width="64dp" />
 
             <TextView

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.sportsgo.sportsgo.Activities.MainActivity;
@@ -37,7 +38,8 @@ public class CompleteViewFragment extends MvpFragment<CompleteView1, CompleteVie
     private Facility mfacility;
 
     TextView FacName, FacName2, Descript, weather_status, PSI, temperature;
-    Button Back, Add;
+    Button Back;
+    ImageButton Add;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -77,7 +79,7 @@ public class CompleteViewFragment extends MvpFragment<CompleteView1, CompleteVie
             }
         });
 
-        Add = (Button) view.findViewById(R.id.Add);
+        Add = (ImageButton) view.findViewById(R.id.Add);
         Add.setOnClickListener(new View.OnClickListener() {
 
             @Override
