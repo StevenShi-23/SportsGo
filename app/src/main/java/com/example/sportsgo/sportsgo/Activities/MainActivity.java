@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.support.v4.widget.DrawerLayout;
 
 import com.example.sportsgo.sportsgo.MyApp;
+import com.example.sportsgo.sportsgo.fragment.SearchViewFragment;
 import com.example.sportsgo.sportsgo.model.Facility;
 import com.example.sportsgo.sportsgo.utilities.RefreshService;
 import com.example.sportsgo.sportsgo.fragment.CompleteViewFragment;
@@ -95,7 +96,7 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
     @Override
     public void selectItem(int position) {
         // Create a new fragment and specify the planet to show based on position
-        Fragment fragment = new BriefViewFragment();;
+        Fragment fragment = new SearchViewFragment();;
         Bundle args = new Bundle();
         args.putInt("ARG_INDEX_NUMBER", position);
         fragment.setArguments(args);
