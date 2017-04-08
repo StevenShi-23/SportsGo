@@ -32,36 +32,35 @@
 
         <ImageView
             android:id="@+id/single_brief_weather_icon"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="2dp"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             android:src="@drawable/sunny_icon" />
         <TextView
             android:id="@+id/single_brief_temperature"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="2dp"
             android:layout_width="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:text="temp: 30 C"
             android:textSize="7pt"
             />
         <TextView
             android:id="@+id/single_brief_psi"
-            android:layout_marginTop="6dp"
             android:layout_width="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:text="PSI: 90"
-            android:textSize="7pt"
-            />
+            android:textSize="7pt"></TextView>
+
     </LinearLayout>
 
-    <Button
+    <!--Button
         android:id="@+id/delete_button"
         android:visibility="invisible"
         android:focusable="false"
@@ -69,6 +68,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-    </Button>
+    </Button-->
 
 </LinearLayout>
