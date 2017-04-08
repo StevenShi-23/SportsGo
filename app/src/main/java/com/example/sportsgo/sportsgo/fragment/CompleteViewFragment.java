@@ -80,11 +80,23 @@ public class CompleteViewFragment extends MvpFragment<CompleteView1, CompleteVie
         });
 
         Add = (ImageButton) view.findViewById(R.id.Add);
+        if(FavoriteList.getInstance().inFavoriteList(mfacility)){
+            Add.setImageResource(R.drawable.heart_uncheck);
+        }
+        else Add.setImageResource(R.drawable.ic_menu_camera);
+
         Add.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                FavoriteList.getInstance().addToFavoriteList(mfacility);
+                if(FavoriteList.getInstance().inFavoriteList(mfacility)) {
+                    FavoriteList.getInstance().removeFromFavoriteList(mfacility);
+                    Add.setImageResource(R.drawable.heart_uncheck);
+                }
+                else{
+                    FavoriteList.getInstance().addToFavoriteList(mfacility);
+                    Add.setImageResource(R.drawable.ic_menu_camera);
+                }
             }
         });
 

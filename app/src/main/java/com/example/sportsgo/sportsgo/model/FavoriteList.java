@@ -24,6 +24,12 @@ public class FavoriteList {
     public ArrayList<Facility> getFavoriteList(){
         return favoriteList;
     }
+
+    public boolean inFavoriteList(Facility facility){
+        if(favoriteList.indexOf(facility)==-1) return false;
+        return true;
+    };
+
     public boolean addToFavoriteList(Facility facility){
         try {
             favoriteList.add(facility);
