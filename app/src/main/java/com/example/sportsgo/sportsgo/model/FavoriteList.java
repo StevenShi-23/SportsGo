@@ -39,7 +39,7 @@ public class FavoriteList {
             return false;
         }
     }
-    public boolean removeFromFavoriteList(){
+    public boolean removeFromFavoriteList(Facility f){
         try {
             //favoriteList.remove();
             return true;

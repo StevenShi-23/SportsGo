@@ -72,9 +72,10 @@ public class RefreshService extends Service {
                     double longitude = jsonobject.getDouble("longitude");
                     double latitude = jsonobject.getDouble("latitude");
                     double temperature = jsonobject.getDouble("temperature");
+                    int psi = jsonobject.getInt("psi");
                     int id = jsonobject.getInt("id");
                     String fname = jsonobject.getString("name");
-                    Facility_list.add(new Facility(id, fname, longitude, latitude, description, temperature, weather_status));
+                    Facility_list.add(new Facility(id, fname, longitude, latitude, description, temperature, weather_status, psi));
                 }
                 FacilityList.getInstance().set_all_facilities(Facility_list);
             }

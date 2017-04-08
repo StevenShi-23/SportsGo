@@ -18,7 +18,8 @@ public class Facility {
     public double distance;
     public String facilityName;
     public String weather_status;
-    public Facility(int id, String name, double longitude, double latitude, String description, double temperature, String weather_status){
+    public int psi;
+    public Facility(int id, String name, double longitude, double latitude, String description, double temperature, String weather_status, int psi){
         this.facilityID = id;
         this.facilityName = name;
         this.longitude = longitude;
@@ -26,5 +27,6 @@ public class Facility {
         this.facilityDescription = description;
         this.temperature = temperature;
         this.weather_status = weather_status;
+        this.psi = psi;
     }
 }
