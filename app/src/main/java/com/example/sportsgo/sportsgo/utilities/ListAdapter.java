@@ -1,6 +1,7 @@
 package com.example.sportsgo.sportsgo.utilities;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +50,19 @@ public class ListAdapter extends ArrayAdapter<Facility> {
         // Populate the data into the template view using the data object
         fName.setText(facility.facilityName);
         fTemp.setText(String.format( "%.1f", facility.temperature )+ (char) 0x00B0 + 'C');
-        fPsi.setText(String.format("PSI: %d",facility.psi));
+        String psi_level;
+        if(facility.psi<50) {
+            psi_level = "Good";
+            fPsi.setTextColor(Color.parseColor("#1a7734"));
+        }
+        else if(facility.psi<100){
+            psi_level = "Moderate";
+            fPsi.setTextColor(Color.parseColor("#ea860b"));}
+        else{
+            psi_level = "Unhealthy";
+            fPsi.setTextColor(Color.parseColor("#e01c0b"));}
+        fPsi.setText(String.format("PSI: %d  ",facility.psi) + psi_level);
+
         // Return the completed view to render on screen
         return convertView;
     }
