@@ -79,7 +79,7 @@ public class CompleteViewFragment extends MvpFragment<CompleteView1, CompleteVie
 
         Add = (ImageButton) view.findViewById(R.id.Add);
         if(FavoriteList.getInstance().inFavoriteList(mfacility)){
-            Add.setImageResource(R.drawable.like_red);
+            Add.setImageResource(R.drawable.heart_check);
         }
         else Add.setImageResource(R.drawable.heart_uncheck);
 
@@ -93,7 +93,7 @@ public class CompleteViewFragment extends MvpFragment<CompleteView1, CompleteVie
                 }
                 else{
                     FavoriteList.getInstance().addToFavoriteList(mfacility);
-                    Add.setImageResource(R.drawable.like_red);
+                    Add.setImageResource(R.drawable.heart_check);
                 }
             }
         });
@@ -124,7 +124,7 @@ public class CompleteViewFragment extends MvpFragment<CompleteView1, CompleteVie
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(flocation));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(flocation,17));
         boolean b = true;
-        mMap.addMarker(new MarkerOptions().position(flocation).title("flocation"));
+        mMap.addMarker(new MarkerOptions().position(flocation).title(mfacility.facilityName));
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
     }
 

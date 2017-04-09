@@ -7,4 +7,7 @@
     <color name="textColorPrimary">#FFFFFF</color>
     <color name="windowBackground">#eff9f9</color>
     <color name="navigationBarColor">#336699</color>
+    <color name="psiHealthy">#5b932d</color>
+    <color name="psiModerate">#ea860b</color>
+    <color name="psiUnhealthy">#e01c0b</color>
 </resources>

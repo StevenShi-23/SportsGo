@@ -1,30 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:weightSum="1">
 
     <ImageView
         android:id="@+id/single_brief_image"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="6dp"
-        android:layout_marginLeft="24dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="12dp"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
         android:src="@drawable/facilty_image"
-        android:layout_weight="0.07" />
+        android:layout_weight="0.07"
+        android:background="@color/colorPrimary"
+        android:padding="0.5dp"/>
 
     <TextView
         android:id="@+id/single_brief_name"
         android:layout_marginLeft="14dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="7dp"
         android:layout_width="180dp"
-
+        android:layout_gravity="top"
         android:layout_height="wrap_content"
         android:text="Facility Name"
-        android:textSize="9pt"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:textSize="8pt"
         />
     <LinearLayout
         android:layout_width="wrap_content"
@@ -50,6 +55,7 @@
             android:layout_height="wrap_content"
             android:text="temp: 30 C"
             android:textSize="7pt"
+            android:textStyle="bold"
             />
         <TextView
             android:id="@+id/single_brief_psi"
@@ -58,7 +64,8 @@
             android:gravity="center"
             android:layout_height="wrap_content"
             android:text="PSI: 90"
-            android:textSize="7pt"></TextView>
+            android:textSize="7pt"
+            android:textStyle="bold"></TextView>
 
     </LinearLayout>
 
@@ -72,4 +79,4 @@
         >
     </Button>
 
-</LinearLayout>
+</GridLayout>
