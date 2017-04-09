@@ -58,6 +58,7 @@
         <activity android:name=".fragment.CompleteView_Tab"
             android:theme="@style/MyMaterialTheme">
         </activity>
+        <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
     </application>
 
 </manifest>

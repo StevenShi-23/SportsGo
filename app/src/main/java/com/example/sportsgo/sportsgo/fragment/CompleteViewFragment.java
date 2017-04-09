@@ -1,5 +1,6 @@
 package com.example.sportsgo.sportsgo.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
@@ -10,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.net.*;
+import android.content.*;
 
 import com.example.sportsgo.sportsgo.Activities.MainActivity;
 import com.example.sportsgo.sportsgo.MyApp;
@@ -38,7 +41,8 @@ public class CompleteViewFragment extends MvpFragment<CompleteView1, CompleteVie
     private Facility mfacility;
 
     TextView FacName, FacName2, Descript, weather_status, PSI, temperature;
-    Button Back;
+    ImageButton Back;
+    ImageButton Call;
     ImageButton Add;
 
     @Override
@@ -68,12 +72,22 @@ public class CompleteViewFragment extends MvpFragment<CompleteView1, CompleteVie
         weather_status = (TextView) view.findViewById(R.id.weather_status);
         weather_status.setText("Weather status: " + mfacility.weather_status);
 
-        Back = (Button) view.findViewById(R.id.Back);
+        Back = (ImageButton) view.findViewById(R.id.Back);
         Back.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
+
+        Call = (ImageButton) view.findViewById(R.id.Call);
+        Call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                callIntent.setData(Uri.parse("tel:93715689"));
+                startActivity(callIntent);
             }
         });
 
@@ -90,6 +104,7 @@ public class CompleteViewFragment extends MvpFragment<CompleteView1, CompleteVie
                 if(FavoriteList.getInstance().inFavoriteList(mfacility)) {
                     FavoriteList.getInstance().removeFromFavoriteList(mfacility);
                     Add.setImageResource(R.drawable.heart_uncheck);
+
                 }
                 else{
                     FavoriteList.getInstance().addToFavoriteList(mfacility);

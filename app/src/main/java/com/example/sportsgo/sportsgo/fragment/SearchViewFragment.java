@@ -74,7 +74,7 @@ public class SearchViewFragment extends MvpFragment<mSearchView, SearchViewPrese
         sv.setIconified(false);
         Resources res = getResources();
         String default_message = res.getString(R.string.search_default);
-        sv.setQuery(default_message, false); // fill in the search term by default
+      //  sv.setQuery(default_message, false); // fill in the search term by default
         sv.clearFocus(); // close the keyboard on load
         MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
         MenuItemCompat.setActionView(item, sv);

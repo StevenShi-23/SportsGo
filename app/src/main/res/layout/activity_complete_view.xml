@@ -15,17 +15,30 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
 
-            <Button
+            <ImageButton
                 android:id="@+id/Back"
                 style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="36dp"
-                android:layout_height="34dp"
+                android:layout_width="58dp"
+                android:layout_height="54dp"
                 android:layout_marginLeft="3dp"
-                android:layout_gravity="center"
-                android:background="@drawable/back_icon"
+                android:scaleType="fitXY"
+                android:layout_gravity="left|center_vertical"
+                android:src="@drawable/back_icon"
                 android:onClick="onBackPressed()"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
+
+                />
+
+            <ImageButton
+                android:id="@+id/Call"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="58dp"
+                android:layout_height="54dp"
+
+                android:layout_gravity="center_vertical"
+
+                android:adjustViewBounds="false"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_phone" />
 
             <ImageButton
                 android:id="@+id/Add"
@@ -37,6 +50,7 @@
 
                 android:scaleType="fitXY"
                 android:src="@drawable/heart_check" />
+
         </GridLayout>
 
     </android.support.design.widget.AppBarLayout>
