@@ -7,7 +7,8 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
         android:layout_height="64dp"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        >
 
         <GridLayout
             android:layout_width="match_parent"
@@ -17,20 +18,24 @@
             <Button
                 android:id="@+id/Back"
                 style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:background="@drawable/back_icon"
                 android:onClick="onBackPressed()"
-                android:text="Back"
                 android:textColor="#FFFFFF"
-                android:textSize="16sp"
-                android:layout_width="64dp" />
+                android:textSize="16sp" />
 
             <ImageButton
                 android:id="@+id/Add"
                 style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_gravity="right"
-                android:layout_width="64dp"
-                android:layout_height="match_parent"
+                android:layout_width="58dp"
+                android:layout_height="54dp"
+
+                android:layout_gravity="center_vertical|right"
+
                 android:scaleType="fitXY"
-                android:src="@drawable/heart_uncheck" />
+                android:src="@drawable/heart_check" />
         </GridLayout>
 
     </android.support.design.widget.AppBarLayout>
