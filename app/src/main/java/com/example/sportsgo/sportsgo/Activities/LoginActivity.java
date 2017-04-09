@@ -62,12 +62,12 @@ public class LoginActivity extends AppCompatActivity {
 
         _loginButton.setEnabled(false);
 
-   /*     final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
-                com.example.sportsgo.sportsgo.R.style.AppTheme_Dark_Dialog);
+        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
+                com.example.sportsgo.sportsgo.R.style.AppTheme_Dialog);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
-*/
+
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 

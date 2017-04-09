@@ -49,7 +49,7 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     public void signup() {
-        Log.d(TAG, "Signup");
+        Log.d("Signup", "Here");
 
         if (!validate()) {
             onSignupFailed();
@@ -58,12 +58,12 @@ public class SignupActivity extends AppCompatActivity {
 
         _signupButton.setEnabled(false);
 
-       /* final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this,
-                com.example.sportsgo.sportsgo.R.style.AppTheme_Dark_Dialog);
+       final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this,
+                com.example.sportsgo.sportsgo.R.style.AppTheme_Dialog);
         progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Creating Account...");
+        progressDialog.setMessage("Welcome to SportsGO");
         progressDialog.show();
-*/
+
         String name = _nameText.getText().toString();
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
@@ -84,6 +84,8 @@ public class SignupActivity extends AppCompatActivity {
 
 
     public void onSignupSuccess() {
+        Log.d("SignupSuccess","Here");
+        finish();
         _signupButton.setEnabled(true);
         setResult(RESULT_OK, null);
         finish();

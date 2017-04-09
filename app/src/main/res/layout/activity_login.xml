@@ -10,8 +10,7 @@
         android:orientation="vertical"
         android:paddingLeft="24dp"
         android:paddingRight="24dp"
-        android:paddingTop="300dp"
-
+        android:paddingTop="430dp"
         >
 
 
@@ -32,6 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email"
+                android:textColor="@color/textColorPrimary"
                 android:backgroundTint="@color/textColorPrimary"
                 android:inputType="textEmailAddress" />
         </android.support.design.widget.TextInputLayout>
