@@ -1,7 +1,7 @@
 package com.example.sportsgo.sportsgo.Activities;
 
-import com.example.sportsgo.sportsgo.presenter.SearchController;
 import com.example.sportsgo.sportsgo.model.Facility;
+import com.example.sportsgo.sportsgo.presenter.SearchController;
 
 /**
  * This class handles the UI of the search view

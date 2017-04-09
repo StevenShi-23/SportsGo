@@ -25,6 +25,7 @@ import com.hannesdorfmann.mosby.mvp.MvpActivity;
 import com.example.sportsgo.sportsgo.presenter.MainPresenter;
 import com.example.sportsgo.sportsgo.view.MainView;
 
+
 import com.example.sportsgo.sportsgo.R;
 
 import android.support.v4.app.Fragment;
@@ -38,6 +39,7 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
     private CharSequence mTitle;
     private CharSequence mDrawerTitle;
     private String mActivityTitle;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +62,7 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
         //if (savedInstanceState == null) {
         //    selectItem(0);
         //}
+
     }
     private void setupDrawer() {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {

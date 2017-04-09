@@ -1,4 +1,6 @@
 package com.example.sportsgo.sportsgo.model;
+import com.google.android.gms.maps.model.LatLng;
+
 import com.example.sportsgo.sportsgo.model.Facility;
 
 import java.util.List;
@@ -15,6 +17,7 @@ public class User {
     private String password;
     private boolean gender;
     private String sportsPreference;
+    private LatLng userlocation;
     private User(){
         userID = 1;
         username = "root";
@@ -25,6 +28,14 @@ public class User {
     }
     public int get_id(){
         return userID;
+    }
+
+    public LatLng  getUserLocation() {
+        return userlocation;
+    }
+
+    public void updateUsrLocation(LatLng LL){
+        this.userlocation= LL;
     }
 
 

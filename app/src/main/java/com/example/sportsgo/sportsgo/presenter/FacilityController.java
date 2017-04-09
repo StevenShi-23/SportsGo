@@ -27,6 +27,7 @@ public class FacilityController {
         URLConnection yc;
         Facility[] target = new Facility[3];
         try {
+            //TODO : delete this class
             query = new URL("http://www.oracle.com/");
             yc = query.openConnection();
             BufferedReader in = new BufferedReader(new InputStreamReader(
