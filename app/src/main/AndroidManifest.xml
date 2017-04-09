@@ -21,12 +21,19 @@
         android:theme="@style/AppTheme">
         <service android:name=".utilities.RefreshService" />
 
-        <activity android:name=".Activities.MainActivity">
+        <activity android:name=".Activities.MainActivity"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+
+        <activity android:name=".Activities.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
         </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -40,6 +47,10 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <activity android:name=".Activities.SignupActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
         <activity
             android:name=".Activities.CompleteView"
             android:label="@string/title_activity_complete_viw" />

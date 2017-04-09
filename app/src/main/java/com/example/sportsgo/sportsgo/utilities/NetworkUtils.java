@@ -94,4 +94,8 @@ public class NetworkUtils {
         }
         return result;
     }
+    public static void editFavorite(int user_id, int facility_id, boolean add){
+
+    }
+
 }

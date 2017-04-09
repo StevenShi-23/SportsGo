@@ -2,7 +2,11 @@ package com.example.sportsgo.sportsgo.model;
 
 import android.util.Log;
 
+import com.example.sportsgo.sportsgo.utilities.Favorites_update;
+import com.example.sportsgo.sportsgo.utilities.NetworkUtils;
+
 import java.util.ArrayList;
+import java.util.Timer;
 
 import static android.content.ContentValues.TAG;
 
@@ -33,15 +37,17 @@ public class FavoriteList {
     public boolean addToFavoriteList(Facility facility){
         try {
             favoriteList.add(facility);
+            new Favorites_update(User.getInstance().get_id(),facility.facilityID, true).execute();
             return true;
         } catch (Exception e){
             Log.d(TAG, "addToFavoriteList: " + e);
             return false;
         }
     }
-    public boolean removeFromFavoriteList(Facility f){
+    public boolean removeFromFavoriteList(Facility facility){
         try {
-            //favoriteList.remove();
+            favoriteList.remove(facility);
+            new Favorites_update(User.getInstance().get_id(),facility.facilityID, false).execute();
             return true;
         } catch (Exception e){
             Log.d(TAG, "addToFavoriteList: " + e);

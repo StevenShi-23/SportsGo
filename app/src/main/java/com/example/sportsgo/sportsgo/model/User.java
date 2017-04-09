@@ -8,13 +8,26 @@ import java.util.List;
  */
 
 public class User {
+    private static User ourInstance = new User();
     private int userID;
     private int age;
     private String username;
+    private String password;
     private boolean gender;
     private String sportsPreference;
-    //Use list<Facility> for faster access to the list of favourite facilities than using reference
-    private List<Facility> favFacilityList;
+    private User(){
+        userID = 1;
+        username = "root";
+        password = "root";
+    }
+    public static User getInstance(){
+        return ourInstance;
+    }
+    public int get_id(){
+        return userID;
+    }
+
+
 }
 
 
