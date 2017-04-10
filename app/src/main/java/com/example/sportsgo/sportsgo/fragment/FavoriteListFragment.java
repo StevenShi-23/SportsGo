@@ -2,6 +2,8 @@ package com.example.sportsgo.sportsgo.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.*;
 import android.widget.AdapterView;
@@ -13,6 +15,7 @@ import com.example.sportsgo.sportsgo.Activities.MainActivity;
 import com.example.sportsgo.sportsgo.MyApp;
 import com.example.sportsgo.sportsgo.R;
 import com.example.sportsgo.sportsgo.model.Facility;
+import com.example.sportsgo.sportsgo.model.FavoriteList;
 import com.example.sportsgo.sportsgo.presenter.FavoriteListPresenter;
 import com.example.sportsgo.sportsgo.utilities.ListAdapter;
 import com.example.sportsgo.sportsgo.view.FavoriteListView;
@@ -64,8 +67,8 @@ public class FavoriteListFragment extends MvpFragment<FavoriteListView, Favorite
 
     public class ListItemLongClickListener implements ListView.OnItemLongClickListener{
         @Override
-        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-            Facility facility = mAdapter.getItem(position);
+        public boolean onItemLongClick(AdapterView<?> parent, final View view, int position, long id) {
+            final Facility facility = mAdapter.getItem(position);
             Log.d("OnItemLongClick","In FavoriteListFragment");
             AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
             alert.setTitle("DELETE");
@@ -75,6 +78,12 @@ public class FavoriteListFragment extends MvpFragment<FavoriteListView, Favorite
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     //do your work here
+                    FavoriteList.getInstance().removeFromFavoriteList(facility);
+                    Fragment currentFragment = getFragmentManager().findFragmentByTag("Favorite");
+                    FragmentTransaction fragTransaction = getFragmentManager().beginTransaction();
+                    fragTransaction.detach(currentFragment);
+                    fragTransaction.attach(currentFragment);
+                    fragTransaction.commit();
                     dialog.dismiss();
 
                 }
