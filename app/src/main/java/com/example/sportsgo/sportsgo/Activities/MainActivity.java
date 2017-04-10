@@ -115,12 +115,18 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
         Bundle args = new Bundle();
         args.putInt("ARG_INDEX_NUMBER", position);
         fragment.setArguments(args);
-
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.content_frame, fragment)
-                .commit();
+        if(position == 1) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, fragment, "Favorite")
+                    .commit();
+        }
+        else{
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .commit();
+        }
 
         //getSupportActionBar().setTitle(navTitles[position]);
         mActivityTitle = navTitles[position];

@@ -57,6 +57,7 @@ public class SearchViewFragment extends MvpFragment<mSearchView, SearchViewPrese
         mListView.setAdapter(mAdapter);
         presenter.getAdapter(mAdapter);
         mListView.setOnItemClickListener(new ListItemClickListener());
+
     }
     private class ListItemClickListener implements ListView.OnItemClickListener {
         @Override

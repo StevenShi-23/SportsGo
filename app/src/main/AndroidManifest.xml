@@ -52,12 +52,7 @@
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
-        <activity
-            android:name=".Activities.CompleteView"
-            android:label="@string/title_activity_complete_viw" />
-        <activity android:name=".fragment.CompleteView_Tab"
-            android:theme="@style/MyMaterialTheme">
-        </activity>
+
         <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
     </application>
 
