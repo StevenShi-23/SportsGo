@@ -6,7 +6,7 @@
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
-        android:layout_height="64dp"
+        android:layout_height="60dp"
         android:layout_width="match_parent"
         >
 
