@@ -101,7 +101,7 @@ public class CompleteViewFragment extends MvpFragment<CompleteView1, CompleteVie
 
             @Override
             public void onClick(View view) {
-                if(FavoriteList.getInstance().inFavoriteList(mfacility)) {
+                if(FavoriteList.getInstance().inFavoriteList(mfacility)==true) {
                     FavoriteList.getInstance().removeFromFavoriteList(mfacility);
                     Add.setImageResource(R.drawable.heart_uncheck);
 
