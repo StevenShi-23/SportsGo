@@ -22,6 +22,7 @@ import com.example.sportsgo.sportsgo.MyApp;
 import com.example.sportsgo.sportsgo.fragment.FavoriteListFragment;
 import com.example.sportsgo.sportsgo.fragment.SearchViewFragment;
 import com.example.sportsgo.sportsgo.model.Facility;
+import com.example.sportsgo.sportsgo.model.FavoriteList;
 import com.example.sportsgo.sportsgo.utilities.RefreshService;
 import com.example.sportsgo.sportsgo.fragment.CompleteViewFragment;
 import com.hannesdorfmann.mosby.mvp.MvpActivity;
@@ -66,10 +67,9 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
             ActivityCompat.requestPermissions( this, new String[] {  android.Manifest.permission.ACCESS_COARSE_LOCATION  },
                     MY_PERMISSION_ACCESS_COURSE_LOCATION );
         }
-        startService(new Intent(MyApp.getContext(), RefreshService.class));
-        //if (savedInstanceState == null) {
-        //    selectItem(0);
-        //}
+        if (savedInstanceState == null) {
+            selectItem(0);
+        }
 
     }
     private void setupDrawer() {

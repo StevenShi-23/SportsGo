@@ -1,41 +1,52 @@
 package com.example.sportsgo.sportsgo.utilities;
 
 import android.os.AsyncTask;
+import android.util.Log;
+
+import java.io.IOException;
 
 /**
  * Created by apple on 9/4/17.
  */
 
-public class Favorites_update extends AsyncTask<Void, Void, Void> {
+public class Favorites_update extends AsyncTask<String, Void, String> {
     private int user_id, facility_id;
-    private boolean ADD;
-    public Favorites_update(int user_id, int facility_id, boolean ADD){
+    private boolean like;
+    public Favorites_update(int user_id, int facility_id, boolean like){
         this.user_id = user_id;
         this.facility_id = facility_id;
-        this.ADD = ADD;
+        this.like = like;
     }
-
-    // Runs in UI before background thread is called
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-
-        // Do something like display a progress bar
     }
 
-    // This is run in a background thread
     @Override
-    protected Void doInBackground(Void... params) {
-        // get the string from params, which is an array
-        //String myString = params[0];
-        //NetworkUtils.editFavorite(user_id, facility_id, ADD);
-        return null;
+    protected String doInBackground(String... params) {
+
+        try {
+            //String searchUrl = params[0];
+            String EditResults = null;
+            try {
+                EditResults  = NetworkUtils.editFavorite(user_id, facility_id, like);
+                Log.d("In backgroud","LoginActivity");
+                return EditResults ;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        catch(Exception e){
+            Log.d("Exception","LoginTask");
+        }
+        return "";
     }
 
-    // This runs in UI when background thread finishes
     @Override
-    protected void onPostExecute(Void result) {
-        super.onPostExecute(result);
+    protected void onPostExecute(String editResults) {
+
+        final String EditResults = editResults;
+        Log.d("EditFavoritesTask",EditResults);
 
     }
 }

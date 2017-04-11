@@ -18,13 +18,16 @@ package com.example.sportsgo.sportsgo.utilities;
 import android.net.Uri;
 import android.util.Log;
 
+import com.example.sportsgo.sportsgo.model.User;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
@@ -43,6 +46,7 @@ public class NetworkUtils {
     final static String PARAM_QUERY = "q";
     final static String ALL_FACILITY = "";
     final static String USER = "/user/";
+    final static String FAVORITES = "/favorites/";
     private static AsyncHttpClient client = new AsyncHttpClient();
     /**
      * Builds the URL used to query backend.
@@ -68,6 +72,10 @@ public class NetworkUtils {
     }
     public static String buildLoginUrl(String username, String password){
         return  BACKEND_BASE_URL + USER + "?user_name=" + username + "&password=" + password;
+    }
+
+    public static String buildFavoritesUrl(int user_id){
+        return  BACKEND_BASE_URL + FAVORITES + "?user=" + user_id;
     }
     /**
      * This method returns the entire result from the HTTP response.
@@ -107,41 +115,13 @@ public class NetworkUtils {
         return result;
     }
 
-    public static String GetLogin(String username, String password, AsyncHttpResponseHandler handler){
-        String url = BACKEND_BASE_URL + USER + "?user_name=" + username + "&password=" + password;
-        String result = null;
-        RequestParams params = new RequestParams();
-        params.put("user_name", username);
-        params.put("password", password);
-        client.get(BACKEND_BASE_URL + USER, params, handler);
-        /*
-        try{
-            result = getResponseFromHttpUrl(url);
-        }
-        catch(IOException e){
-            Log.d("getAllFacilities", "IOException");
-        }
-        return result;
-        */
-        return "";
-    }
-
-    public static void editFavorite(int user_id, int facility_id, boolean add) throws IOException {
-        URL url = new URL(BACKEND_BASE_URL+"/favorites/");
+    public static String httpPost(URL url, String query) throws IOException{
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setReadTimeout(10000);
         conn.setConnectTimeout(15000);
         conn.setRequestMethod("POST");
         conn.setDoInput(true);
         conn.setDoOutput(true);
-
-        Uri.Builder builder = new Uri.Builder()
-                .appendQueryParameter("user", ""+user_id)
-                .appendQueryParameter("facility", ""+facility_id);
-        if(add) builder.appendQueryParameter("like", "1");
-        else builder.appendQueryParameter("like","0");
-        String query = builder.build().getEncodedQuery();
-
         OutputStream os = conn.getOutputStream();
         BufferedWriter writer = new BufferedWriter(
                 new OutputStreamWriter(os, "UTF-8"));
@@ -149,15 +129,36 @@ public class NetworkUtils {
         writer.flush();
         writer.close();
         os.close();
+        int responseCode = conn.getResponseCode();
+        BufferedReader in = new BufferedReader(
+                new InputStreamReader(conn.getInputStream()));
+        String inputLine;
+        StringBuffer response = new StringBuffer();
 
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+        in.close();
         conn.connect();
-        //try {
-        //    getResponseFromHttpUrl(url);
-        //} catch (IOException e) {
-        //    e.printStackTrace();
-        //}
-        //AsyncHttpClient client = new AsyncHttpClient();
-        //client.post(getAbsoluteUrl(url), params, responseHandler);
+        return response.toString();
+    }
+    public static String signUp(String user_name, String password) throws IOException{
+        URL url = new URL(BACKEND_BASE_URL+USER);
+        Uri.Builder builder = new Uri.Builder()
+                .appendQueryParameter("user_name", user_name)
+                .appendQueryParameter("password", password);
+        String query = builder.build().getEncodedQuery();
+        return NetworkUtils.httpPost(url, query);
+    }
+    public static String editFavorite(int user_id, int facility_id, boolean add) throws IOException {
+        URL url = new URL(BACKEND_BASE_URL+FAVORITES);
+        Uri.Builder builder = new Uri.Builder()
+                .appendQueryParameter("user", ""+user_id)
+                .appendQueryParameter("facility", ""+facility_id);
+        if(add) builder.appendQueryParameter("like", "1");
+        else builder.appendQueryParameter("like","0");
+        String query = builder.build().getEncodedQuery();
+        return NetworkUtils.httpPost(url, query);
     }
 
 }

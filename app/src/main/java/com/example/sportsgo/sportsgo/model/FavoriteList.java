@@ -2,6 +2,7 @@ package com.example.sportsgo.sportsgo.model;
 
 import android.util.Log;
 
+import com.example.sportsgo.sportsgo.utilities.Favorites_get;
 import com.example.sportsgo.sportsgo.utilities.Favorites_update;
 import com.example.sportsgo.sportsgo.utilities.NetworkUtils;
 
@@ -23,12 +24,15 @@ public class FavoriteList {
 
     private FavoriteList() {
         favoriteList = new ArrayList<Facility>();
+        //new Favorites_get(User.getInstance().get_id()).execute();
         //favoriteList = FacilityList.getInstance().get_all_facilities();
     }
     public ArrayList<Facility> getFavoriteList(){
         return favoriteList;
     }
-
+    public void set_all_facilities(ArrayList<Facility> favorites){
+        favoriteList = favorites;
+    }
     public boolean inFavoriteList(Facility facility){
         if(favoriteList.indexOf(facility)==-1) return false;
         return true;

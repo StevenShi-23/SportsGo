@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.example.sportsgo.sportsgo.MyApp;
 import com.example.sportsgo.sportsgo.model.Facility;
 import com.example.sportsgo.sportsgo.model.FacilityList;
+import com.example.sportsgo.sportsgo.model.User;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

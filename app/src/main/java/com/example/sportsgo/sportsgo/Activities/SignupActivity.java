@@ -27,6 +27,7 @@ import butterknife.Bind;
 
 public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
+    private ProgressDialog progressDialog;
     private android.os.Handler mHandler;
     @Bind(R.id.input_name) EditText _nameText;
     @Bind(R.id.input_password) EditText _passwordText;
@@ -53,31 +54,27 @@ public class SignupActivity extends AppCompatActivity {
                 finish();
             }
         });
+        progressDialog = new ProgressDialog(SignupActivity.this,
+                R.style.AppTheme_Dialog);
+
     }
 
     public void signup() {
         Log.d("Signup", "Here");
 
         if (!validate()) {
-            onSignupFailed();
+            onSignupFailed("");
             return;
         }
 
         _signupButton.setEnabled(false);
 
-       final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this,
-                R.style.AppTheme_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Welcome to SportsGO");
-        progressDialog.show();
-
         String name = _nameText.getText().toString();
 
         String password = _passwordText.getText().toString();
 
-        // TODO: Implement your own signup logic here.
-        //String login_url = NetworkUtils.buildSignupUrl(username, password);
-        new SignupTask().execute();
+        new SignupTask(name, password).execute();
+        /*
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
@@ -88,7 +85,7 @@ public class SignupActivity extends AppCompatActivity {
                  //       progressDialog.dismiss();
                     }
                 }, 3000);
-
+        */
     }
 
 
@@ -100,8 +97,8 @@ public class SignupActivity extends AppCompatActivity {
         finish();
     }
 
-    public void onSignupFailed() {
-        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
+    public void onSignupFailed(String msg) {
+        Toast.makeText(getBaseContext(), "SignUp failed " + msg, Toast.LENGTH_LONG).show();
 
         _signupButton.setEnabled(true);
     }
@@ -130,11 +127,18 @@ public class SignupActivity extends AppCompatActivity {
         return valid;
     }
 
-    public class SignupTask extends AsyncTask<String, Void, String> {
-
+    private class SignupTask extends AsyncTask<String, Void, String> {
+        private String user_name, password;
+        public SignupTask(String user_name, String password){
+            this.user_name = user_name;
+            this.password = password;
+        }
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            progressDialog.setIndeterminate(true);
+            progressDialog.setMessage("Welcome to SportsGO");
+            progressDialog.show();
 
         }
 
@@ -142,48 +146,41 @@ public class SignupActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
 
             try {
-                String searchUrl = params[0];
-                String LoginhResults = null;
-                try {
-                    LoginhResults = NetworkUtils.getResponseFromHttpUrl(searchUrl);
-                    Log.d("In backgroud","LoginActivity");
-                    return LoginhResults;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                String SignUpResults = null;
+                SignUpResults = NetworkUtils.signUp(user_name, password);
+                Log.d("In backgroud","SignUpActivity");
+                return SignUpResults;
             }
-            catch(Exception e){
+            catch(IOException e){
                 Log.d("Exception","LoginTask");
             }
             return "";
         }
 
         @Override
-        protected void onPostExecute(String LoginResults) {
+        protected void onPostExecute(String SignUpResults) {
 
-            final String loginResults = LoginResults;
-            mHandler.postDelayed(new Runnable(){
+            final String loginResults = SignUpResults;
+            Log.d("SignUpActivity", loginResults);
+            mHandler.postDelayed(new Runnable() {
                 @Override
-                public void run(){
-
+                public void run() {
+                    progressDialog.hide();
                     try {
                         JSONObject result = new JSONObject(loginResults);
-                        Boolean status = result.getBoolean("Login");
+                        Boolean status = result.getBoolean("Signup");
                         if (status) {
-                            int id = result.getInt("msg");
-                            //onLoginSuccess(id);
+                            onSignupSuccess();
                         } else {
                             String msg = result.getString("msg");
-                            //onLoginFailed(msg);
+                            onSignupFailed(msg);
                         }
                     }
                     catch(Exception e){
                         Log.d("Exception","LoginTask");
                     }
                 }
-            }, 1500);
-
-
+            },1000);
         }
     }
 }

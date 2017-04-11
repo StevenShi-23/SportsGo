@@ -20,9 +20,8 @@ public class User {
     private boolean gender;
     private String sportsPreference;
     private LatLng userlocation;
-    private Location location;
     private User(){
-        userID = 1;
+        //userID = 1;
         username = "root";
         password = "root";
     }
@@ -44,10 +43,7 @@ public class User {
         userID = id;
     }
     public void setLocation(Location l){
-        location = l;
-    }
-    public Location getLocation(){
-        return location;
+
     }
 
 }

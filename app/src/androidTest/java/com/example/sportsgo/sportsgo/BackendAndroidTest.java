@@ -14,6 +14,7 @@ import com.example.sportsgo.sportsgo.model.FacilityList;
 import com.example.sportsgo.sportsgo.model.User;
 import com.example.sportsgo.sportsgo.utilities.NetworkUtils;
 import com.example.sportsgo.sportsgo.utilities.UserLocation;
+import com.google.android.gms.maps.model.LatLng;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.json.JSONArray;
@@ -98,11 +99,18 @@ public class BackendAndroidTest {
     public void getLocation(){
         UserLocation loc = new UserLocation();
         loc.getLocation();
-        Location l = User.getInstance().getLocation();
+        LatLng l = User.getInstance().getUserLocation();
         Log.d("getLocation","pass");
     }
-    public class EditFavoritesTask extends AsyncTask<String, Void, String> {
 
+    public class EditFavoritesTask extends AsyncTask<String, Void, String> {
+        private int user_id, facility_id;
+        private boolean like;
+        public EditFavoritesTask(int user_id, int facility_id, boolean like){
+            this.user_id = user_id;
+            this.facility_id = facility_id;
+            this.like = like;
+        }
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -112,12 +120,12 @@ public class BackendAndroidTest {
         protected String doInBackground(String... params) {
 
             try {
-                String searchUrl = params[0];
-                String LoginhResults = null;
+                //String searchUrl = params[0];
+                String EditResults = null;
                 try {
-                    LoginhResults = NetworkUtils.getResponseFromHttpUrl(searchUrl);
+                    EditResults  = NetworkUtils.editFavorite(user_id, facility_id, like);
                     Log.d("In backgroud","LoginActivity");
-                    return LoginhResults;
+                    return EditResults ;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -129,16 +137,17 @@ public class BackendAndroidTest {
         }
 
         @Override
-        protected void onPostExecute(String LoginResults) {
+        protected void onPostExecute(String editResults) {
 
-            final String loginResults = LoginResults;
+            final String EditResults = editResults;
+            Log.d("EditFavoritesTask",EditResults);
 
         }
     }
 
     @Test
     public void editFavorite() {
-        new EditFavoritesTask().execute("");
+        new EditFavoritesTask(1,1,true).execute();
     }
 
 }

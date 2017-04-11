@@ -17,9 +17,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sportsgo.sportsgo.MyApp;
 import com.example.sportsgo.sportsgo.R;
+import com.example.sportsgo.sportsgo.model.FacilityList;
 import com.example.sportsgo.sportsgo.model.User;
+import com.example.sportsgo.sportsgo.utilities.Favorites_get;
 import com.example.sportsgo.sportsgo.utilities.NetworkUtils;
+import com.example.sportsgo.sportsgo.utilities.RefreshService;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -70,6 +74,7 @@ public class LoginActivity extends AppCompatActivity {
         });
         progressDialog = new ProgressDialog(LoginActivity.this,
                 com.example.sportsgo.sportsgo.R.style.AppTheme_Dialog);
+        startService(new Intent(MyApp.getContext(), RefreshService.class));
     }
 
     public void login() {
@@ -112,13 +117,15 @@ public class LoginActivity extends AppCompatActivity {
     public void onLoginSuccess(int id) {
         _loginButton.setEnabled(true);
         User.getInstance().setID(id);
+
+        new Favorites_get(User.getInstance().get_id()).execute();
         Intent i = new Intent(getApplicationContext(),MainActivity.class);
         startActivity(i);
         //finish();
     }
 
     public void onLoginFailed(String msg) {
-        Toast.makeText(getBaseContext(), "Login failed" + msg, Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "Login failed " + msg, Toast.LENGTH_LONG).show();
 
         _loginButton.setEnabled(true);
     }

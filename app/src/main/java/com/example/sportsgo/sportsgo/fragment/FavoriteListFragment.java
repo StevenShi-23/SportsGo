@@ -50,6 +50,7 @@ public class FavoriteListFragment extends MvpFragment<FavoriteListView, Favorite
         mListView.setOnItemClickListener(new FavoriteListFragment.ListItemClickListener());
         mListView.setOnItemLongClickListener(new FavoriteListFragment.ListItemLongClickListener());
         registerForContextMenu(mListView);
+
     }
     @Override
     public FavoriteListPresenter createPresenter(){
