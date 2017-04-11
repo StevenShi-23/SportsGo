@@ -18,8 +18,15 @@ package com.example.sportsgo.sportsgo.utilities;
 import android.net.Uri;
 import android.util.Log;
 
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -35,6 +42,8 @@ public class NetworkUtils {
 
     final static String PARAM_QUERY = "q";
     final static String ALL_FACILITY = "";
+    final static String USER = "/user/";
+    private static AsyncHttpClient client = new AsyncHttpClient();
     /**
      * Builds the URL used to query backend.
      *
@@ -57,15 +66,18 @@ public class NetworkUtils {
 
         return url;
     }
-
+    public static String buildLoginUrl(String username, String password){
+        return  BACKEND_BASE_URL + USER + "?user_name=" + username + "&password=" + password;
+    }
     /**
      * This method returns the entire result from the HTTP response.
      *
-     * @param url The URL to fetch the HTTP response from.
+     * @param murl The URL to fetch the HTTP response from.
      * @return The contents of the HTTP response.
      * @throws IOException Related to network and stream reading
      */
-    public static String getResponseFromHttpUrl(URL url) throws IOException {
+    public static String getResponseFromHttpUrl(String murl) throws IOException {
+        URL url = new URL(murl);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         try {
             InputStream in = urlConnection.getInputStream();
@@ -87,15 +99,65 @@ public class NetworkUtils {
         URL url = buildUrl(ALL_FACILITY);
         String result = null;
         try{
-            result = getResponseFromHttpUrl(url);
+            result = getResponseFromHttpUrl(BACKEND_BASE_URL+ALL_FACILITY);
         }
         catch(IOException e){
             Log.d("getAllFacilities", "IOException");
         }
         return result;
     }
-    public static void editFavorite(int user_id, int facility_id, boolean add){
 
+    public static String GetLogin(String username, String password, AsyncHttpResponseHandler handler){
+        String url = BACKEND_BASE_URL + USER + "?user_name=" + username + "&password=" + password;
+        String result = null;
+        RequestParams params = new RequestParams();
+        params.put("user_name", username);
+        params.put("password", password);
+        client.get(BACKEND_BASE_URL + USER, params, handler);
+        /*
+        try{
+            result = getResponseFromHttpUrl(url);
+        }
+        catch(IOException e){
+            Log.d("getAllFacilities", "IOException");
+        }
+        return result;
+        */
+        return "";
+    }
+
+    public static void editFavorite(int user_id, int facility_id, boolean add) throws IOException {
+        URL url = buildUrl("/favorites");
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setReadTimeout(10000);
+        conn.setConnectTimeout(15000);
+        conn.setRequestMethod("POST");
+        conn.setDoInput(true);
+        conn.setDoOutput(true);
+
+        Uri.Builder builder = new Uri.Builder()
+                .appendQueryParameter("user", ""+user_id)
+                .appendQueryParameter("facility", ""+facility_id);
+        if(add) builder.appendQueryParameter("like", "1");
+        else builder.appendQueryParameter("like","0");
+        String query = builder.build().getEncodedQuery();
+
+        OutputStream os = conn.getOutputStream();
+        BufferedWriter writer = new BufferedWriter(
+                new OutputStreamWriter(os, "UTF-8"));
+        writer.write(query);
+        writer.flush();
+        writer.close();
+        os.close();
+
+        conn.connect();
+        //try {
+        //    getResponseFromHttpUrl(url);
+        //} catch (IOException e) {
+        //    e.printStackTrace();
+        //}
+        //AsyncHttpClient client = new AsyncHttpClient();
+        //client.post(getAbsoluteUrl(url), params, responseHandler);
     }
 
 }

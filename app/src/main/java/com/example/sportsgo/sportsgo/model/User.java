@@ -37,6 +37,9 @@ public class User {
     public void updateUsrLocation(LatLng LL){
         this.userlocation= LL;
     }
+    public void setID(int id){
+        userID = id;
+    }
 
 
 }

@@ -10,6 +10,7 @@ import android.util.Log;
 import com.example.sportsgo.sportsgo.model.Facility;
 import com.example.sportsgo.sportsgo.model.FacilityList;
 import com.example.sportsgo.sportsgo.utilities.NetworkUtils;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -18,6 +19,8 @@ import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cz.msebera.android.httpclient.Header;
 
 
 /**
@@ -56,5 +59,31 @@ public class BackendAndroidTest {
         FacilityList.getInstance().set_all_facilities(Facility_list);
         Log.d("Backend TEST:", " ends");
     }
+    @Test
+    public void network() throws Exception{
+        NetworkUtils.GetLogin("haha","xixi",new AsyncHttpResponseHandler() {
+            @Override
+            public void onStart() {
+                // Initiated the request
+            }
 
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] response) {
+                // Successfully got a response
+                //onLoginSuccess();
+                Log.d("Success","Test");
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] errorResponse, Throwable e) {
+                // Response failed :(
+                Log.d("Failed","Test");
+            }
+
+            @Override
+            public void onFinish() {
+                // Completed the request (either success or failure)
+            }
+        });
+    }
 }

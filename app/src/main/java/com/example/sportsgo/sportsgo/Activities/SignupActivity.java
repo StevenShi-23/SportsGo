@@ -5,7 +5,9 @@ package com.example.sportsgo.sportsgo.Activities;
  */
 
 import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -14,12 +16,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.sportsgo.sportsgo.R;
+import com.example.sportsgo.sportsgo.utilities.NetworkUtils;
+
+import org.json.JSONObject;
+
+import java.io.IOException;
+
 import butterknife.ButterKnife;
 import butterknife.Bind;
 
 public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
-
+    private android.os.Handler mHandler;
     @Bind(R.id.input_name) EditText _nameText;
     @Bind(R.id.input_password) EditText _passwordText;
     @Bind(R.id.btn_signup) Button _signupButton;
@@ -30,7 +38,7 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         ButterKnife.bind(this);
-
+        mHandler = new Handler();
         _signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,7 +76,8 @@ public class SignupActivity extends AppCompatActivity {
         String password = _passwordText.getText().toString();
 
         // TODO: Implement your own signup logic here.
-
+        //String login_url = NetworkUtils.buildSignupUrl(username, password);
+        new SignupTask().execute();
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
@@ -79,6 +88,7 @@ public class SignupActivity extends AppCompatActivity {
                  //       progressDialog.dismiss();
                     }
                 }, 3000);
+
     }
 
 
@@ -118,5 +128,62 @@ public class SignupActivity extends AppCompatActivity {
         }
 
         return valid;
+    }
+
+    public class SignupTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+                String searchUrl = params[0];
+                String LoginhResults = null;
+                try {
+                    LoginhResults = NetworkUtils.getResponseFromHttpUrl(searchUrl);
+                    Log.d("In backgroud","LoginActivity");
+                    return LoginhResults;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            catch(Exception e){
+                Log.d("Exception","LoginTask");
+            }
+            return "";
+        }
+
+        @Override
+        protected void onPostExecute(String LoginResults) {
+
+            final String loginResults = LoginResults;
+            mHandler.postDelayed(new Runnable(){
+                @Override
+                public void run(){
+
+                    try {
+                        JSONObject result = new JSONObject(loginResults);
+                        Boolean status = result.getBoolean("Login");
+                        if (status) {
+                            int id = result.getInt("msg");
+                            //onLoginSuccess(id);
+                        } else {
+                            String msg = result.getString("msg");
+                            //onLoginFailed(msg);
+                        }
+                    }
+                    catch(Exception e){
+                        Log.d("Exception","LoginTask");
+                    }
+                }
+            }, 1500);
+
+
+        }
     }
 }
