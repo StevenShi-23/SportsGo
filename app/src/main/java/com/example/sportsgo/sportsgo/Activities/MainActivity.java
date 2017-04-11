@@ -233,6 +233,4 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
         // Sync the toggle state after onRestoreInstanceState has occurred.
         mDrawerToggle.syncState();
     }
-
-
 }

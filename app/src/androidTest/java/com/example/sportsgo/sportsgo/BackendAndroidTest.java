@@ -49,7 +49,6 @@ public class BackendAndroidTest {
             double latitude = jsonobject.getDouble("latitude");
             double temperature = jsonobject.getDouble("temperature");
             int id = jsonobject.getInt("id");
-            //int id = jsonobject.getInt("id");
             String name = jsonobject.getString("name");
             int psi = jsonobject.getInt("psi");
             Facility_list.add(new Facility(id, name, longitude, latitude, description, temperature, weather_status,psi));
