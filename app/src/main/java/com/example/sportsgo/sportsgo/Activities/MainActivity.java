@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -39,7 +40,7 @@ import com.example.sportsgo.sportsgo.R;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
-public class MainActivity extends MvpActivity<MainView, MainPresenter> implements MainView {
+public class MainActivity extends MvpActivity<MainView, MainPresenter> implements MainView,GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     private String[] navTitles;
     private ListView mDrawerList;
     private DrawerLayout mDrawerLayout;
@@ -94,16 +95,30 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
         mGoogleApiClient.disconnect();
         super.onStop();
     }
+    @Override
+    public void onConnectionFailed(ConnectionResult var1){}
 
-    Location mCurrentLocation;
-    mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-                    if (mCurrentLocation != null) {
-        double lat = mCurrentLocation.getLatitude();
-        double lng = mCurrentLocation.getLongitude();
+    @Override
+    public void onConnectionSuspended(int i){}
+    //public void ConnectionCallbacks{
+    //    onConnectionSuspended();
+    //}
 
-        User.updateUsrLocation(lat, lng);
 
+    @Override
+    public void onConnected(Bundle connectionHint) {
+        Location mLastLocation;
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                mGoogleApiClient);
+        if (mLastLocation != null) {
+
+            double latitude = mLastLocation.getLatitude();
+            double longitude = mLastLocation.getLongitude();
+            //mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
+            //mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
+        }
     }
+
 
 
     private void setupDrawer() {

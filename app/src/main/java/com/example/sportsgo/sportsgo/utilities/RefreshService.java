@@ -76,7 +76,7 @@ public class RefreshService extends Service {
                     int id = jsonobject.getInt("id");
                     int popularity = jsonobject.getInt("popularity");
                     String fname = jsonobject.getString("name");
-                    Facility_list.add(new Facility(id, fname, longitude, latitude, description, temperature, weather_status, psi, popularity));
+                    Facility_list.add(new Facility(id, fname, longitude, latitude, description, temperature, weather_status, psi));
                 }
                 FacilityList.getInstance().set_all_facilities(Facility_list);
             }
