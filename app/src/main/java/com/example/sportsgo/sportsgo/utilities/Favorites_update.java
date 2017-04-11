@@ -28,7 +28,7 @@ public class Favorites_update extends AsyncTask<Void, Void, Void> {
     protected Void doInBackground(Void... params) {
         // get the string from params, which is an array
         //String myString = params[0];
-        NetworkUtils.editFavorite(user_id, facility_id, ADD);
+        //NetworkUtils.editFavorite(user_id, facility_id, ADD);
         return null;
     }
 

@@ -2,11 +2,20 @@ package com.example.sportsgo.sportsgo.utilities;
 
 import android.app.Service;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.sportsgo.sportsgo.MyApp;
 import com.example.sportsgo.sportsgo.model.Facility;
 import com.example.sportsgo.sportsgo.model.FacilityList;
 
@@ -34,6 +43,24 @@ public class RefreshService extends Service {
     private Handler mHandler = new Handler();
     // timer handling
     private Timer mTimer = null;
+    private LocationManager mLocationManager;
+
+    private final LocationListener mLocationListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(final Location location) {
+            //your code here
+            Log.d("LocationListener", "Changed");
+        }
+        @Override
+        public void onStatusChanged(String a, int b, Bundle c){}
+
+        @Override
+        public void onProviderEnabled(String s){}
+
+        @Override
+        public void onProviderDisabled(String s){}
+    };
+
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -49,9 +76,22 @@ public class RefreshService extends Service {
             // recreate new
             mTimer = new Timer();
         }
+
         // schedule task
         mTimer.scheduleAtFixedRate(new getFacilityTask(), 0, NOTIFY_INTERVAL);
+        mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        if ( Build.VERSION.SDK_INT >= 23 &&
+                ContextCompat.checkSelfPermission(MyApp.getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission( MyApp.getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Log.d("No permission", "RefreshSERVICE") ;
+            return;
+        }
+
+        mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10*1000,
+                100, mLocationListener);
     }
+
+
 
     class getFacilityTask extends TimerTask {
 
@@ -61,7 +101,7 @@ public class RefreshService extends Service {
             String name = Thread.currentThread().getName();
             Log.d("Refresh Service at ",name);
             String facility_json =  NetworkUtils.getAllFacilities();
-            Log.d("Backend TEST:", " starts");
+            Log.d("getFacilityTask:", " starts");
             try {
                 JSONArray facilities_array = new JSONArray(facility_json);
                 ArrayList<Facility> Facility_list = new ArrayList<Facility>();
@@ -82,7 +122,7 @@ public class RefreshService extends Service {
             catch (Exception e){
                 Log.d("Error RefreshService: ", e.toString());
             }
-            Log.d("Backend TEST:", " ends");
+            Log.d("getFacilityTask:", " ends");
         }
 
         private String getDateTime() {

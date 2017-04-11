@@ -5,8 +5,11 @@ package com.example.sportsgo.sportsgo.Activities;
  */
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -58,6 +61,11 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
         // Set the list's click listener
         mDrawerList.setOnItemClickListener(presenter.getNewDrawerItemClickListener());
         setupDrawer();
+        if ( ContextCompat.checkSelfPermission( this, android.Manifest.permission.ACCESS_COARSE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
+
+            //ActivityCompat.requestPermissions( this, new String[] {  android.Manifest.permission.ACCESS_COARSE_LOCATION  },
+            //        RESTRICTIONS_SERVICE.MY_PERMISSION_ACCESS_COURSE_LOCATION );
+        }
         startService(new Intent(MyApp.getContext(), RefreshService.class));
         //if (savedInstanceState == null) {
         //    selectItem(0);
