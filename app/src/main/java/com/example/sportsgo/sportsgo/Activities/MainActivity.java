@@ -42,7 +42,7 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
     private CharSequence mTitle;
     private CharSequence mDrawerTitle;
     private String mActivityTitle;
-
+    private int MY_PERMISSION_ACCESS_COURSE_LOCATION;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,8 +63,8 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
         setupDrawer();
         if ( ContextCompat.checkSelfPermission( this, android.Manifest.permission.ACCESS_COARSE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
 
-            //ActivityCompat.requestPermissions( this, new String[] {  android.Manifest.permission.ACCESS_COARSE_LOCATION  },
-            //        RESTRICTIONS_SERVICE.MY_PERMISSION_ACCESS_COURSE_LOCATION );
+            ActivityCompat.requestPermissions( this, new String[] {  android.Manifest.permission.ACCESS_COARSE_LOCATION  },
+                    MY_PERMISSION_ACCESS_COURSE_LOCATION );
         }
         startService(new Intent(MyApp.getContext(), RefreshService.class));
         //if (savedInstanceState == null) {

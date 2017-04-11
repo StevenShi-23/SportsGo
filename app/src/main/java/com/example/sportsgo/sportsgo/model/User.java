@@ -1,4 +1,6 @@
 package com.example.sportsgo.sportsgo.model;
+import android.location.Location;
+
 import com.google.android.gms.maps.model.LatLng;
 
 import com.example.sportsgo.sportsgo.model.Facility;
@@ -18,6 +20,7 @@ public class User {
     private boolean gender;
     private String sportsPreference;
     private LatLng userlocation;
+    private Location location;
     private User(){
         userID = 1;
         username = "root";
@@ -40,7 +43,12 @@ public class User {
     public void setID(int id){
         userID = id;
     }
-
+    public void setLocation(Location l){
+        location = l;
+    }
+    public Location getLocation(){
+        return location;
+    }
 
 }
 

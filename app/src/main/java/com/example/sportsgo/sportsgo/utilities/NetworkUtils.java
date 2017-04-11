@@ -127,7 +127,7 @@ public class NetworkUtils {
     }
 
     public static void editFavorite(int user_id, int facility_id, boolean add) throws IOException {
-        URL url = buildUrl("/favorites");
+        URL url = new URL(BACKEND_BASE_URL+"/favorites/");
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setReadTimeout(10000);
         conn.setConnectTimeout(15000);

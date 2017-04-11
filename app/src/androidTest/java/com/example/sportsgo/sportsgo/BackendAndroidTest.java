@@ -1,7 +1,9 @@
 package com.example.sportsgo.sportsgo;
 
 import android.app.Application;
+import android.location.Location;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.test.filters.LargeTest;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.ActivityUnitTestCase;
@@ -9,7 +11,9 @@ import android.util.Log;
 
 import com.example.sportsgo.sportsgo.model.Facility;
 import com.example.sportsgo.sportsgo.model.FacilityList;
+import com.example.sportsgo.sportsgo.model.User;
 import com.example.sportsgo.sportsgo.utilities.NetworkUtils;
+import com.example.sportsgo.sportsgo.utilities.UserLocation;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.json.JSONArray;
@@ -17,6 +21,7 @@ import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,6 +64,7 @@ public class BackendAndroidTest {
         FacilityList.getInstance().set_all_facilities(Facility_list);
         Log.d("Backend TEST:", " ends");
     }
+    /*
     @Test
     public void network() throws Exception{
         NetworkUtils.GetLogin("haha","xixi",new AsyncHttpResponseHandler() {
@@ -86,4 +92,54 @@ public class BackendAndroidTest {
             }
         });
     }
+
+    */
+    @Test
+    public void getLocation(){
+        UserLocation loc = new UserLocation();
+        loc.getLocation();
+        Location l = User.getInstance().getLocation();
+        Log.d("getLocation","pass");
+    }
+    public class EditFavoritesTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+                String searchUrl = params[0];
+                String LoginhResults = null;
+                try {
+                    LoginhResults = NetworkUtils.getResponseFromHttpUrl(searchUrl);
+                    Log.d("In backgroud","LoginActivity");
+                    return LoginhResults;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            catch(Exception e){
+                Log.d("Exception","LoginTask");
+            }
+            return "";
+        }
+
+        @Override
+        protected void onPostExecute(String LoginResults) {
+
+            final String loginResults = LoginResults;
+
+        }
+    }
+
+    @Test
+    public void editFavorite() {
+        new EditFavoritesTask().execute("");
+    }
+
 }
+
