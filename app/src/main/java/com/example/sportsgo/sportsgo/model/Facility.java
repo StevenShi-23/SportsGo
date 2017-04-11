@@ -31,14 +31,13 @@ public class Facility {
         this.weather_status = weather_status;
         this.psi = psi;
         this.popularity = popularity;
+        distanceToUsr();
     }
 
-    public void distanceToUsr(User UsrInstance){
-        LatLng usrLocation =UsrInstance.getUserLocation();
-
+    public void distanceToUsr(){
+        LatLng usrLocation =User.getInstance().getUserLocation();
         double usrLat = usrLocation.latitude;
         double usrLng = usrLocation.longitude;
-
         double earthRadius = 6371; // 6371.0 kilometers
         double dLat = Math.toRadians(usrLat-this.latitude);
         double dLng = Math.toRadians(usrLng-this.longitude);

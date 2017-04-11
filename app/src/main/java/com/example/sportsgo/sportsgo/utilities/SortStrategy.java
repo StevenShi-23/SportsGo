@@ -21,8 +21,8 @@ class sortByDistance implements SortStrategy {
         Collections.sort(all_facilities, new Comparator<Facility>() {
             @Override
             public int compare(Facility fD1, Facility fD2) {
-                // -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
-                return (int) (fD1.distance - fD2.distance);
+                // -1 - less than, 1 - greater than, all inversed for descending
+                return (fD1.distance - fD2.distance)<0?-1:1;
             }
         });
     }
@@ -35,7 +35,7 @@ class sortByPopularity implements SortStrategy {
             @Override
             public int compare(Facility fD1, Facility fD2) {
                 // -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
-                return (int) (fD1.popularity - fD2.popularity);
+                return (fD1.popularity - fD2.popularity)<0?-1:1;
             }
         });
     }

@@ -24,6 +24,7 @@ public class User {
         //userID = 1;
         username = "root";
         password = "root";
+        userlocation = new LatLng(1.3483, 103.6831);
     }
     public static User getInstance(){
         return ourInstance;

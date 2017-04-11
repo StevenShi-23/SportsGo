@@ -47,30 +47,23 @@ public class SearchViewPresenter extends MvpBasePresenter<mSearchView> {
         perform_search();
         perform_sort();
         perform_filter();
-    }
-    private void perform_search(){
-       // List<Facility> facilities = FacilityList.getInstance().get_all_facilities();
-        facilities = ExactSearch.exact_search(search_keywords, facilities, DEFAULT_KEYWORD);
-        //TODO filter strategy && sort strategy
         mAdapter.clear();
         mAdapter.addAll(facilities);
     }
-
-    private void perform_sort(){
-        if(sort_option=="")
-            return;
-        List<Facility> sortFacilities;
-        sortContext.setSortByStrategy(sort_option,facilities);
-        mAdapter.clear();
-     //   mAdapter.addAll(sortFacilities);
+    private void perform_search(){
+       // List<Facility> facilities = FacilityList.getInstance().get_all_facilities();
+        facilities = ExactSearch.exact_search(search_keywords, FacilityList.getInstance().get_all_facilities(), DEFAULT_KEYWORD);
     }
 
     private void perform_filter(){
         if(filter_option=="")
             return;
-        List<Facility> filterFacilities;
-        filterFacilities = filterContext.setFilterByStrategy(filter_option,facilities,"dry");
-        mAdapter.clear();
-        mAdapter.addAll(filterFacilities);
+        facilities = filterContext.setFilterByStrategy(filter_option,facilities,"dry");
+    }
+
+    private void perform_sort(){
+        if(sort_option=="")
+            return;
+        sortContext.setSortByStrategy(sort_option,facilities);
     }
 }
