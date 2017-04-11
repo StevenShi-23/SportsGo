@@ -97,6 +97,34 @@ public class SearchViewFragment extends MvpFragment<mSearchView, SearchViewPrese
         });
     }
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.menuSortDistance:
+                Log.d("Menuclick","distance");
+                presenter.update("sort_option", "distance");
+                return true;
+            case R.id.menuSortPopularity:
+                Log.d("Menuclick","popularity");
+                presenter.update("sort_option", "popularity");
+                return true;
+            case R.id.drySports:
+                Log.d("Menuclick","dry");
+                presenter.update("filter_option", "dry");
+                return true;
+            case R.id.waterSports:
+                Log.d("Menuclick","water");
+                presenter.update("filter_option", "water");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+
+    @Override
     public SearchViewPresenter createPresenter(){
         return new SearchViewPresenter();
     }

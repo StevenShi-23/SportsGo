@@ -12,11 +12,11 @@
         android:title="Sort Facilities"
         android:icon="@drawable/ic_menu_sort"
         app:showAsAction="always">
-        <menu>
+        <menu android:id="@+id/menu_sort">
             <item
-                android:id="@+id/menuSortDistan"
-                android:title="By distance"
-                />
+            android:id="@+id/menuSortDistance"
+            android:title="By distance"
+            />
             <item
                 android:id="@+id/menuSortPopularity"
                 android:title="By popularity" />
@@ -27,7 +27,13 @@
         android:icon="@drawable/ic_menu_filter"
         app:showAsAction="always">
         <menu>
-
+            <item
+                android:id="@+id/drySports"
+                android:title="Dry Sports"
+                />
+            <item
+                android:id="@+id/waterSports"
+                android:title="Water Sports" />
         </menu>
     </item>
 </menu>

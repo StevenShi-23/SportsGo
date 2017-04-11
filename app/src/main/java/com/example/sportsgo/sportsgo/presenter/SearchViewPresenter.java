@@ -6,6 +6,7 @@ import com.example.sportsgo.sportsgo.model.Facility;
 import com.example.sportsgo.sportsgo.model.FacilityList;
 import com.example.sportsgo.sportsgo.utilities.ExactSearch;
 import com.example.sportsgo.sportsgo.utilities.ListAdapter;
+import com.example.sportsgo.sportsgo.utilities.SortStrategy;
 import com.example.sportsgo.sportsgo.view.mSearchView;
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 
@@ -19,6 +20,7 @@ public class SearchViewPresenter extends MvpBasePresenter<mSearchView> {
     private ListAdapter mAdapter;
     private String sort_option = "", filter_option = "", search_keywords = "";
     private String DEFAULT_KEYWORD = "all facilities";
+    private List<Facility> facilities = FacilityList.getInstance().get_all_facilities();
     public SearchViewPresenter(){
 
     }
@@ -41,12 +43,22 @@ public class SearchViewPresenter extends MvpBasePresenter<mSearchView> {
             return;
         }
         perform_search();
+        perform_sort();
+        perform_filter();
     }
     private void perform_search(){
-        List<Facility> facilities = FacilityList.getInstance().get_all_facilities();
+       // List<Facility> facilities = FacilityList.getInstance().get_all_facilities();
         facilities = ExactSearch.exact_search(search_keywords, facilities, DEFAULT_KEYWORD);
         //TODO filter strategy && sort strategy
         mAdapter.clear();
         mAdapter.addAll(facilities);
+    }
+
+    private void perform_sort(){
+
+    }
+
+    private void perform_filter(){
+        
     }
 }
