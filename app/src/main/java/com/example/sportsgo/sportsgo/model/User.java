@@ -17,7 +17,8 @@ public class User {
     private String password;
     private boolean gender;
     private String sportsPreference;
-    private LatLng userlocation;
+    private double Latitude;
+    private double Longitude;
     private User(){
         userID = 1;
         username = "root";
@@ -30,12 +31,17 @@ public class User {
         return userID;
     }
 
-    public LatLng  getUserLocation() {
-        return userlocation;
+    public double  getUserLatitude() {
+        return Latitude;
     }
 
-    public void updateUsrLocation(LatLng LL){
-        this.userlocation= LL;
+    public double  getUserLongitude() {
+        return Longitude;
+    }
+
+    public void updateUsrLocation(double  Lat, double  Lng){
+        this.Latitude = Lat;
+        this.Longitude = Lng;
     }
 
 

@@ -34,10 +34,9 @@ public class Facility {
     }
 
     public void distanceToUsr(User UsrInstance){
-        LatLng usrLocation =UsrInstance.getUserLocation();
 
-        double usrLat = usrLocation.latitude;
-        double usrLng = usrLocation.longitude;
+        double usrLat = UsrInstance.getUserLatitude();
+        double usrLng = UsrInstance.getUserLongitude();
 
         double earthRadius = 6371; // 6371.0 kilometers
         double dLat = Math.toRadians(usrLat-this.latitude);

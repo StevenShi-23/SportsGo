@@ -5,6 +5,7 @@ package com.example.sportsgo.sportsgo.Activities;
  */
 
 import android.content.Intent;
+import android.location.Location;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,6 +15,13 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.support.v4.widget.DrawerLayout;
+
+//location service
+import com.example.sportsgo.sportsgo.model.User;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
+
 
 import com.example.sportsgo.sportsgo.MyApp;
 import com.example.sportsgo.sportsgo.fragment.FavoriteListFragment;
@@ -39,6 +47,8 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
     private CharSequence mTitle;
     private CharSequence mDrawerTitle;
     private String mActivityTitle;
+    public GoogleApiClient mGoogleApiClient;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,11 +69,43 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
         mDrawerList.setOnItemClickListener(presenter.getNewDrawerItemClickListener());
         setupDrawer();
         startService(new Intent(MyApp.getContext(), RefreshService.class));
+
         //if (savedInstanceState == null) {
         //    selectItem(0);
         //}
+    }
+
+    protected synchronized void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addApi(LocationServices.API)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .build();
+    }
+
+    @Override
+    protected void onStart() {
+        mGoogleApiClient.connect();
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        mGoogleApiClient.disconnect();
+        super.onStop();
+    }
+
+    Location mCurrentLocation;
+    mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+                    if (mCurrentLocation != null) {
+        double lat = mCurrentLocation.getLatitude();
+        double lng = mCurrentLocation.getLongitude();
+
+        User.updateUsrLocation(lat, lng);
 
     }
+
+
     private void setupDrawer() {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
 
@@ -171,4 +213,6 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
         // Sync the toggle state after onRestoreInstanceState has occurred.
         mDrawerToggle.syncState();
     }
+
+
 }
