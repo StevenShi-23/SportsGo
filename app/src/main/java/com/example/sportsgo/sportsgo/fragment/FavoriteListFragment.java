@@ -2,17 +2,20 @@ package com.example.sportsgo.sportsgo.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.AdapterView;
 import android.widget.ListView;
-
+import android.support.v7.app.AlertDialog;
+import android.content.DialogInterface;
+import android.app.Activity;
 import com.example.sportsgo.sportsgo.Activities.MainActivity;
 import com.example.sportsgo.sportsgo.MyApp;
 import com.example.sportsgo.sportsgo.R;
 import com.example.sportsgo.sportsgo.model.Facility;
+import com.example.sportsgo.sportsgo.model.FavoriteList;
 import com.example.sportsgo.sportsgo.presenter.FavoriteListPresenter;
 import com.example.sportsgo.sportsgo.utilities.ListAdapter;
 import com.example.sportsgo.sportsgo.view.FavoriteListView;
@@ -45,6 +48,8 @@ public class FavoriteListFragment extends MvpFragment<FavoriteListView, Favorite
         mListView.setAdapter(mAdapter);
         presenter.getAdapter(mAdapter);
         mListView.setOnItemClickListener(new FavoriteListFragment.ListItemClickListener());
+        mListView.setOnItemLongClickListener(new FavoriteListFragment.ListItemLongClickListener());
+        registerForContextMenu(mListView);
     }
     @Override
     public FavoriteListPresenter createPresenter(){
@@ -59,4 +64,42 @@ public class FavoriteListFragment extends MvpFragment<FavoriteListView, Favorite
             ((MainActivity)getActivity()).enterCompleteView(facility);
         }
     }
+
+    public class ListItemLongClickListener implements ListView.OnItemLongClickListener{
+        @Override
+        public boolean onItemLongClick(AdapterView<?> parent, final View view, int position, long id) {
+            final Facility facility = mAdapter.getItem(position);
+            Log.d("OnItemLongClick","In FavoriteListFragment");
+            AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+            alert.setTitle("DELETE");
+            alert.setMessage("Remove from My Favourites? ");
+            alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //do your work here
+                    FavoriteList.getInstance().removeFromFavoriteList(facility);
+                    Fragment currentFragment = getFragmentManager().findFragmentByTag("Favorite");
+                    FragmentTransaction fragTransaction = getFragmentManager().beginTransaction();
+                    fragTransaction.detach(currentFragment);
+                    fragTransaction.attach(currentFragment);
+                    fragTransaction.commit();
+                    dialog.dismiss();
+
+                }
+            });
+            alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    dialog.dismiss();
+                }
+            });
+
+            alert.show();
+            return true;
+        }
+    }
+
 }
