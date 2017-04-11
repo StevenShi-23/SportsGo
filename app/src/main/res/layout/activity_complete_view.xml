@@ -82,7 +82,7 @@
                     android:text="Facility Name"
                     android:textColor="#000"
                     android:textAlignment="center"
-                    android:textSize="2sp" />
+                    android:textSize="20sp" />
             </LinearLayout>
 
             <com.google.android.gms.maps.MapView

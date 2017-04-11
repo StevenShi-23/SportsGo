@@ -14,15 +14,14 @@ public class Facility {
     public double longitude, latitude;
     public double temperature;
     public int facilityID;
-    public int PSI;
-    // populariy is defined as the number of favourites, will use dummy data if favourite not implemented
-    public int popularity;
+    // populariy is proportional the number of favourites, will use dummy data if favourite not implemented
+    public double popularity;
     public double distance;
     public String facilityName;
     public String weather_status;
     public int psi;
 
-    public Facility(int id, String name, double longitude, double latitude, String description, double temperature, String weather_status, int psi){
+    public Facility(int id, String name, double longitude, double latitude, String description, double temperature, String weather_status, int psi, double popularity){
         this.facilityID = id;
         this.facilityName = name;
         this.longitude = longitude;
@@ -31,6 +30,7 @@ public class Facility {
         this.temperature = temperature;
         this.weather_status = weather_status;
         this.psi = psi;
+        this.popularity = popularity;
     }
 
     public void distanceToUsr(User UsrInstance){
