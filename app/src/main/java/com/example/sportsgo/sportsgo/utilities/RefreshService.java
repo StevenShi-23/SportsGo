@@ -7,6 +7,7 @@ import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.sportsgo.sportsgo.model.User;
 import com.example.sportsgo.sportsgo.model.Facility;
 import com.example.sportsgo.sportsgo.model.FacilityList;
 
@@ -62,6 +63,11 @@ public class RefreshService extends Service {
             Log.d("Refresh Service at ",name);
             String facility_json =  NetworkUtils.getAllFacilities();
             Log.d("Backend TEST:", " starts");
+
+
+            double usrLat = User.getInstance().getUserLatitude();
+            double usrLng = User.getInstance().getUserLongitude();
+            Log.d("User Location:", "Got User location : UsrLat = "+usrLat+", UsrLng = "+usrLng);
             try {
                 JSONArray facilities_array = new JSONArray(facility_json);
                 ArrayList<Facility> Facility_list = new ArrayList<Facility>();
@@ -76,7 +82,7 @@ public class RefreshService extends Service {
                     int id = jsonobject.getInt("id");
                     int popularity = jsonobject.getInt("popularity");
                     String fname = jsonobject.getString("name");
-                    Facility_list.add(new Facility(id, fname, longitude, latitude, description, temperature, weather_status, psi));
+                    Facility_list.add(new Facility(id, fname, longitude, latitude, description, temperature, weather_status, psi, popularity,usrLat,usrLng ));
                 }
                 FacilityList.getInstance().set_all_facilities(Facility_list);
             }

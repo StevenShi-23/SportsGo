@@ -17,8 +17,9 @@ public class User {
     private String password;
     private boolean gender;
     private String sportsPreference;
-    private double Latitude;
-    private double Longitude;
+    //by default, user is in NTU
+    private double Latitude = 1.3483;
+    private double Longitude = 103.6831;
     private User(){
         userID = 1;
         username = "root";

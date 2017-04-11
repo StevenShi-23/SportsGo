@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.example.sportsgo.sportsgo.model.Facility;
 import com.example.sportsgo.sportsgo.model.FacilityList;
+import com.example.sportsgo.sportsgo.model.User;
 import com.example.sportsgo.sportsgo.utilities.NetworkUtils;
 
 import org.json.JSONArray;
@@ -39,6 +40,9 @@ public class BackendAndroidTest {
         //System.out.println(builtUri);
         Log.d("Backend TEST:", " starts");
         Log.d("Backend TEST:", facility_json);
+        double usrLat = User.getInstance().getUserLatitude();
+        double usrLng = User.getInstance().getUserLongitude();
+        Log.d("User Location:", "Got User location : UsrLat = "+usrLat+", UsrLng = "+usrLng);
         JSONArray facilities_array = new JSONArray(facility_json);
         ArrayList<Facility> Facility_list = new ArrayList<Facility>();
         for (int i = 0; i < facilities_array.length(); i++) {
@@ -51,7 +55,9 @@ public class BackendAndroidTest {
             int id = jsonobject.getInt("id");
             String name = jsonobject.getString("name");
             int psi = jsonobject.getInt("psi");
-            Facility_list.add(new Facility(id, name, longitude, latitude, description, temperature, weather_status,psi));
+            int  popularity = jsonobject.getInt("popularity");
+
+            Facility_list.add(new Facility(id, name, longitude, latitude, description, temperature, weather_status,psi,popularity,usrLat,usrLng));
         }
         FacilityList.getInstance().set_all_facilities(Facility_list);
         Log.d("Backend TEST:", " ends");

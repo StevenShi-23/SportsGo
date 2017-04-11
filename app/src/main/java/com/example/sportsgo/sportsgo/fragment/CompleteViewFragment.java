@@ -68,7 +68,7 @@ public class CompleteViewFragment extends MvpFragment<CompleteView1, CompleteVie
         temperature = (TextView) view.findViewById(R.id.Temperature);
         temperature.setText("Temperature: " + mfacility.temperature);
         PSI = (TextView) view.findViewById(R.id.PSI);
-        PSI.setText("PSI index: " + mfacility.PSI);
+        PSI.setText("PSI index: " + mfacility.psi);
         weather_status = (TextView) view.findViewById(R.id.weather_status);
         weather_status.setText("Weather status: " + mfacility.weather_status);
 
