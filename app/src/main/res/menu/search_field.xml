@@ -1,10 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/search"
-        android:title="@string/search_title"
-        android:iconifiedByDefault="true"
+    <item
+        android:id="@+id/search"
+        android:actionViewClass="android.support.v7.widget.SearchView"
         android:icon="@drawable/ic_search"
-        app:showAsAction="collapseActionView|ifRoom"
-        android:actionViewClass="android.support.v7.widget.SearchView" />
+        android:iconifiedByDefault="true"
+        android:title="@string/search_title"
+        app:showAsAction="always" />
+    <item android:id="@+id/sort"
+        android:title="Sort Facilities"
+        android:icon="@drawable/ic_menu_sort"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/menuSortDistan"
+                android:title="By distance"
+                />
+            <item
+                android:id="@+id/menuSortPopularity"
+                android:title="By popularity" />
+        </menu>
+    </item>
+    <item android:id="@+id/filter"
+        android:title="Filter Facilities"
+        android:icon="@drawable/ic_menu_filter"
+        app:showAsAction="always">
+        <menu>
+
+        </menu>
+    </item>
 </menu>
