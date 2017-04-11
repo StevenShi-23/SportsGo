@@ -37,7 +37,7 @@ public class SearchViewPresenter extends MvpBasePresenter<mSearchView> {
     }
     public void update(String opt, String field){
         if(opt == "sort_option" && field != sort_option){
-            //sort option should be either "by distance" or "popularity"
+            //sort option should be either by "distance" or "popularity"
             this.sort_option = field;
         }
         else if(opt == "filter_option" && field != filter_option){

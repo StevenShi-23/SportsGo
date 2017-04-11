@@ -1,5 +1,7 @@
 package com.example.sportsgo.sportsgo.model;
 
+import android.location.Location;
+
 import com.google.android.gms.maps.model.LatLng;
 
 /**
@@ -14,15 +16,14 @@ public class Facility {
     public double longitude, latitude;
     public double temperature;
     public int facilityID;
-    public int PSI;
     // populariy is defined as the number of favourites, will use dummy data if favourite not implemented
-    public int popularity;
-    public double distance;
+    public int popularity = 0;
+    public double distance = 0;
     public String facilityName;
     public String weather_status;
     public int psi;
 
-    public Facility(int id, String name, double longitude, double latitude, String description, double temperature, String weather_status, int psi, int popularity){
+    public Facility(int id, String name, double longitude, double latitude, String description, double temperature, String weather_status, int psi, int popularity, double usrLat, double usrLng){
         this.facilityID = id;
         this.facilityName = name;
         this.longitude = longitude;
@@ -31,25 +32,23 @@ public class Facility {
         this.temperature = temperature;
         this.weather_status = weather_status;
         this.psi = psi;
-        this.popularity = 0;
+        this.popularity = popularity;
+        this.distance = meterDistanceBetweenPoints(usrLat, usrLng, this.latitude,this.longitude);
     }
 
-    public void distanceToUsr(User UsrInstance){
+    private double meterDistanceBetweenPoints(double usrLat, double usrLng, double fLat, double fLng) {
+        Location locationUsr = new Location("point A");
 
-        double usrLat = UsrInstance.getUserLatitude();
-        double usrLng = UsrInstance.getUserLongitude();
+        locationUsr.setLatitude(usrLat);
+        locationUsr.setLongitude(usrLng);
 
-        double earthRadius = 6371; // 6371.0 kilometers
-        double dLat = Math.toRadians(usrLat-this.latitude);
-        double dLng = Math.toRadians(usrLng-this.longitude);
-        double sindLat = Math.sin(dLat / 2);
-        double sindLng = Math.sin(dLng / 2);
-        double a = Math.pow(sindLat, 2) + Math.pow(sindLng, 2)
-                    * Math.cos(Math.toRadians(this.latitude)) * Math.cos(Math.toRadians(usrLat));
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        double dist = earthRadius * c;
+        Location locationF = new Location("point B");
 
-        this.distance = dist;
+        locationF.setLatitude(fLat);
+        locationF.setLongitude(fLng);
+
+        double distance = locationUsr.distanceTo(locationF);
+        return distance;
     }
 
 
