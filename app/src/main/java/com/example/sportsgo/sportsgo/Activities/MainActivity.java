@@ -108,9 +108,8 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
             fragment = new FavoriteListFragment();
         }
         else if(position == 2){
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
+            Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+            startActivity(i);
         }
         Bundle args = new Bundle();
         args.putInt("ARG_INDEX_NUMBER", position);
