@@ -71,18 +71,18 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
         setupDrawer();
         startService(new Intent(MyApp.getContext(), RefreshService.class));
 
-        //if (savedInstanceState == null) {
-        //    selectItem(0);
-        //}
-    }
-
-    protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(LocationServices.API)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .build();
+
+        //if (savedInstanceState == null) {
+        //    selectItem(0);
+        //}
     }
+
+
 
     @Override
     protected void onStart() {
