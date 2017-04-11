@@ -5,6 +5,8 @@ import android.util.Log;
 import com.example.sportsgo.sportsgo.model.Facility;
 import com.example.sportsgo.sportsgo.model.FacilityList;
 import com.example.sportsgo.sportsgo.utilities.ExactSearch;
+import com.example.sportsgo.sportsgo.utilities.sortContext;
+import com.example.sportsgo.sportsgo.utilities.filterContext;
 import com.example.sportsgo.sportsgo.utilities.ListAdapter;
 import com.example.sportsgo.sportsgo.utilities.SortStrategy;
 import com.example.sportsgo.sportsgo.view.mSearchView;
@@ -55,10 +57,20 @@ public class SearchViewPresenter extends MvpBasePresenter<mSearchView> {
     }
 
     private void perform_sort(){
-
+        if(sort_option=="")
+            return;
+        List<Facility> sortFacilities;
+        sortContext.setSortByStrategy(sort_option,facilities);
+        mAdapter.clear();
+     //   mAdapter.addAll(sortFacilities);
     }
 
     private void perform_filter(){
-        
+        if(filter_option=="")
+            return;
+        List<Facility> filterFacilities;
+        filterFacilities = filterContext.setFilterByStrategy(filter_option,facilities,"dry");
+        mAdapter.clear();
+        mAdapter.addAll(filterFacilities);
     }
 }

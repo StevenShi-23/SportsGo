@@ -9,15 +9,16 @@ import java.util.List;
  */
 
 public class sortContext {
-    private SortStrategy sortBy;
-    public void setSortByStrategy (String option, List<Facility> all_facilities){
+
+    public static void setSortByStrategy (String option, List<Facility> all_facilities){
+        SortStrategy sortBy;
         if (option=="popularity"){
-            this.sortBy = new sortByPopularity();
+            sortBy = new sortByPopularity();
             sortBy.SortFacility(all_facilities);
         }
         else{
             // by default, sort by distance
-            this.sortBy = new sortByDistance();
+            sortBy = new sortByDistance();
             sortBy.SortFacility(all_facilities);
         }
     }

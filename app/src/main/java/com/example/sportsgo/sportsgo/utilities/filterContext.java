@@ -9,14 +9,14 @@ import java.util.List;
  */
 
 public class filterContext {
-    private FilterStrategy filterBy;
 
-    public List<Facility> setFilterByStrategy(String creteria, List<Facility> all_facilities, String DEFAULT_CRETARIA) {
+    public static List<Facility> setFilterByStrategy(String creteria, List<Facility> all_facilities, String DEFAULT_CRETARIA) {
+        FilterStrategy filterBy;
         if (creteria == "dry") {
-            this.filterBy = new FilterDrySports();
+            filterBy = new FilterDrySports();
             return filterBy.FilterFacility(creteria, all_facilities, DEFAULT_CRETARIA);
         } else {
-            this.filterBy = new FilterDrySports();
+            filterBy = new FilterDrySports();
             return filterBy.FilterFacility(creteria,all_facilities, DEFAULT_CRETARIA);
         }
     }
