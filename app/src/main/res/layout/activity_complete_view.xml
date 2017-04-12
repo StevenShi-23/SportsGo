@@ -93,39 +93,70 @@
 
             <GridLayout
                 android:layout_width="match_parent"
-                android:layout_height="250dp">
+                android:layout_height="250dp"
+               >
 
                 <TextView
                     android:id="@+id/Descript"
-                    android:layout_width="215dp"
+                    android:layout_width="200dp"
                     android:layout_height="270dp"
+                    android:layout_marginTop="12dp"
                     android:layout_column="12"
                     android:layout_row="0"
-                    android:text="ID = Descript" />
+                    android:text="ID = Descript"
+                    android:textColor="#000"
+                    android:textSize="7pt"
+                    android:layout_marginLeft="15dp"
+                    android:layout_gravity="left"
+                    />
 
                 <LinearLayout
-                    android:layout_width="166dp"
+                    android:layout_width="176dp"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="12dp"
                     android:orientation="vertical"
                     android:weightSum="1">
-
+                    <ImageView
+                        android:id="@+id/weatherIcon"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="2dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/sunny_icon" />
                     <TextView
                         android:id="@+id/Temperature"
-                        android:layout_width="match_parent"
+                        android:layout_marginTop="4dp"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
                         android:layout_height="wrap_content"
-                        android:text="ID = WeatherInfo" />
-
+                        android:text="temp: 30 C"
+                        android:textSize="7pt"
+                        android:textStyle="bold"
+                        />
                     <TextView
                         android:id="@+id/PSI"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
                         android:layout_height="wrap_content"
-                        android:text="ID = WeatherInfo" />
-
+                        android:text="PSI: 90 Unhealthy"
+                        android:textSize="7pt"
+                        android:textStyle="bold"></TextView>
                     <TextView
                         android:id="@+id/weather_status"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_marginTop="4dp"
                         android:layout_height="wrap_content"
-                        android:text="ID = WeatherInfo" />
+                        android:text="Weather: Cloudy"
+                        android:textSize="7pt"
+                        android:textStyle="bold"></TextView>
+
 
                 </LinearLayout>
 

@@ -1,6 +1,7 @@
 package com.example.sportsgo.sportsgo.fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.net.*;
 import android.content.*;
@@ -64,10 +66,30 @@ public class CompleteViewFragment extends MvpFragment<CompleteView1, CompleteVie
         temperature = (TextView) view.findViewById(R.id.Temperature);
         temperature.setText("Temperature: " + mfacility.temperature);
         PSI = (TextView) view.findViewById(R.id.PSI);
-        PSI.setText("PSI index: " + mfacility.psi);
+        String psi_level;
+        if(mfacility.psi<50) {
+            psi_level = "Good";
+            PSI.setTextColor(Color.parseColor("#1a7734"));
+        }
+        else if(mfacility.psi<100){
+            psi_level = "Moderate";
+            PSI.setTextColor(Color.parseColor("#ea860b"));}
+        else{
+            psi_level = "Unhealthy";
+            PSI.setTextColor(Color.parseColor("#e01c0b"));}
+        PSI.setText(String.format("PSI index: %d  ",mfacility.psi) + psi_level);
         weather_status = (TextView) view.findViewById(R.id.weather_status);
         weather_status.setText("Weather status: " + mfacility.weather_status);
-
+        ImageView wIcon = (ImageView) view.findViewById(R.id.weatherIcon);
+        if(mfacility.weather_status.toLowerCase().contains("cloudy".toLowerCase())){
+            wIcon.setImageResource(R.drawable.cloud_icon);
+        }
+        else if(mfacility.weather_status.toLowerCase().contains("rain".toLowerCase())){
+            wIcon.setImageResource(R.drawable.rain_icon);
+        }
+        else{
+            wIcon.setImageResource(R.drawable.sunny_icon);
+        }
         Back = (ImageButton) view.findViewById(R.id.Back);
         Back.setOnClickListener(new View.OnClickListener() {
 
