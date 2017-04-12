@@ -35,7 +35,6 @@ import com.hannesdorfmann.mosby.mvp.MvpFragment;
  */
 
 public class CompleteViewFragment extends MvpFragment<CompleteView1, CompleteViewPresenter> implements CompleteView1, OnMapReadyCallback {
-    //private Facility
     private MapView mapView;
     private GoogleMap mMap;
     private Facility mfacility;
@@ -49,12 +48,9 @@ public class CompleteViewFragment extends MvpFragment<CompleteView1, CompleteVie
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         super.onCreateView(inflater, parent, savedInstanceState);
         Log.d("Start","Here");
-        //setContentView(R.layout.activity_complete_view);
+
         View view = inflater.inflate(R.layout.activity_complete_view, null);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        //SupportMapFragment mapFragment = (SupportMapFragment) getActivity().getSupportFragmentManager()
-        //        .findFragmentById(R.id.map);
-        //mapFragment.getMapAsync(this);
+
         return view;
     }
 
@@ -86,7 +82,7 @@ public class CompleteViewFragment extends MvpFragment<CompleteView1, CompleteVie
             @Override
             public void onClick(View view) {
                 Intent callIntent = new Intent(Intent.ACTION_DIAL);
-                callIntent.setData(Uri.parse("tel:93715689"));
+                callIntent.setData(Uri.parse("tel:66538900"));
                 startActivity(callIntent);
             }
         });

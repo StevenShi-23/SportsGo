@@ -44,6 +44,7 @@ public class ListAdapter extends ArrayAdapter<Facility> {
         // Lookup view for data population
 
         TextView fName = (TextView) convertView.findViewById(R.id.single_brief_name);
+        TextView fDistance = (TextView) convertView.findViewById(R.id.single_brief_distance);
         TextView fTemp = (TextView) convertView.findViewById(R.id.single_brief_temperature);
         TextView fPsi = (TextView) convertView.findViewById(R.id.single_brief_psi);
         ImageView wIcon = (ImageView) convertView.findViewById(R.id.single_brief_weather_icon);
@@ -58,6 +59,7 @@ public class ListAdapter extends ArrayAdapter<Facility> {
         }
         // Populate the data into the template view using the data object
         fName.setText(facility.facilityName);
+        fDistance.setText(String.format( "%.1f", facility.distance ) + "  km");
         fTemp.setText(String.format( "%.1f", facility.temperature )+ (char) 0x00B0 + 'C');
         String psi_level;
         if(facility.psi<50) {
