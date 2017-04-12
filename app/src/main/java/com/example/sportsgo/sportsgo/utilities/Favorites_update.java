@@ -30,14 +30,14 @@ public class Favorites_update extends AsyncTask<String, Void, String> {
             String EditResults = null;
             try {
                 EditResults  = NetworkUtils.editFavorite(user_id, facility_id, like);
-                Log.d("In backgroud","LoginActivity");
+                Log.d("In backgroud","Favorites update");
                 return EditResults ;
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
         catch(Exception e){
-            Log.d("Exception","LoginTask");
+            Log.d("Exception","Favorites update");
         }
         return "";
     }

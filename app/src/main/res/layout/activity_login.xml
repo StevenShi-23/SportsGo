@@ -30,7 +30,7 @@
                 android:id="@+id/input_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
+                android:hint="User Name"
                 android:textColor="@color/textColorPrimary"
                 android:backgroundTint="@color/textColorPrimary"
                 android:inputType="textEmailAddress" />

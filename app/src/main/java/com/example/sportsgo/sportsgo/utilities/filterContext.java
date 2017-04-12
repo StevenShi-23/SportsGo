@@ -16,7 +16,7 @@ public class filterContext {
             filterBy = new FilterDrySports();
             return filterBy.FilterFacility(creteria, all_facilities, DEFAULT_CRETARIA);
         } else {
-            filterBy = new FilterDrySports();
+            filterBy = new FilterWaterSports();
             return filterBy.FilterFacility(creteria,all_facilities, DEFAULT_CRETARIA);
         }
     }
