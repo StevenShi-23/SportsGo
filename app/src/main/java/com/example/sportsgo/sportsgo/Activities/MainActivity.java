@@ -157,6 +157,11 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
     @Override
     public void selectItem(int position) {
         // Create a new fragment and specify the planet to show based on position
+        if(position == 2){
+            Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+            startActivity(i);
+            return;
+        }
         Fragment fragment = null;
         if(position == 0){
             fragment = new SearchViewFragment();
@@ -164,10 +169,7 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
         else if(position == 1){
             fragment = new FavoriteListFragment();
         }
-        else if(position == 2){
-            Intent i = new Intent(getApplicationContext(),LoginActivity.class);
-            startActivity(i);
-        }
+
         Bundle args = new Bundle();
         args.putInt("ARG_INDEX_NUMBER", position);
         fragment.setArguments(args);

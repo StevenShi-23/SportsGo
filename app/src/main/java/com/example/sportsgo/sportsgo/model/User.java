@@ -44,6 +44,9 @@ public class User {
         this.Latitude = Lat;
         this.Longitude = Lng;
     }
+    public void setID(int id){
+        userID = id;
+    }
 
 
 }

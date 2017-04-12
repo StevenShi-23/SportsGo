@@ -1,6 +1,13 @@
 package com.example.sportsgo.sportsgo;
 
+import android.util.Log;
+
+import com.example.sportsgo.sportsgo.utilities.NetworkUtils;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+
 import org.junit.Test;
+
+import cz.msebera.android.httpclient.Header;
 
 import static org.junit.Assert.*;
 
@@ -14,4 +21,5 @@ public class ExampleUnitTest {
     public void addition_isCorrect() throws Exception {
         assertEquals(4, 2 + 2);
     }
+
 }
