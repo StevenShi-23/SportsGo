@@ -58,7 +58,7 @@ public class SearchViewPresenter extends MvpBasePresenter<mSearchView> {
     private void perform_filter(){
         if(filter_option=="")
             return;
-        facilities = filterContext.setFilterByStrategy(filter_option,facilities,"dry");
+        facilities = filterContext.setFilterByStrategy(filter_option,facilities,"");
     }
 
     private void perform_sort(){
