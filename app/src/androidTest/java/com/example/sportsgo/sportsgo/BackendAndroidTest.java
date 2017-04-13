@@ -60,7 +60,8 @@ public class BackendAndroidTest {
             int id = jsonobject.getInt("id");
             String name = jsonobject.getString("name");
             int psi = jsonobject.getInt("psi");
-            Facility_list.add(new Facility(id, name, longitude, latitude, description, temperature, weather_status,psi));
+            double popularity = jsonobject.getDouble("popularity");
+            Facility_list.add(new Facility(id, name, longitude, latitude, description, temperature, weather_status,psi, popularity));
         }
         FacilityList.getInstance().set_all_facilities(Facility_list);
         Log.d("Backend TEST:", " ends");

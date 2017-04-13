@@ -44,7 +44,7 @@ public class User {
         userID = id;
     }
     public void setLocation(Location l){
-
+        this.userlocation = new LatLng(l.getLatitude(),l.getLongitude());
     }
 
 }
