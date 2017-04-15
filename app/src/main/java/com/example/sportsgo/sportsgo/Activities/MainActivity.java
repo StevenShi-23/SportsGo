@@ -5,14 +5,17 @@ package com.example.sportsgo.sportsgo.Activities;
  */
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -182,9 +185,34 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
     public void selectItem(int position) {
         // Create a new fragment and specify the planet to show based on position
         if(position == 2){
-            Intent i = new Intent(getApplicationContext(),LoginActivity.class);
-            startActivity(i);
+            AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+            alert.setTitle("Logout");
+            alert.setMessage("Are you sure to logout?");
+
+
+            alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //do your work here
+                    Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+                    startActivity(i);
+                    dialog.dismiss();
+                    return;
+                }
+            });
+            alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    dialog.dismiss();
+                }
+            });
+
+            alert.show();
             return;
+
         }
         Fragment fragment = null;
         if(position == 0){
