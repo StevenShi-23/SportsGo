@@ -137,9 +137,14 @@ public class LoginActivity extends AppCompatActivity {
         String password = _passwordText.getText().toString();
 
         if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-            _passwordText.setError("between 2 and 10 alphanumeric characters");
+            _passwordText.setError("between 4 and 10 alphanumeric characters");
             valid = false;
-        } else {
+        }
+        else if(username.isEmpty() || username.length() < 3){
+            _passwordText.setError("at least 3 alphanumeric characters");
+            valid = false;
+        }
+        else {
             _passwordText.setError(null);
         }
 
