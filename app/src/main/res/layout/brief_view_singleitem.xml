@@ -26,7 +26,7 @@
         android:id="@+id/single_brief_name"
         android:layout_marginLeft="14dp"
         android:layout_marginTop="10dp"
-        android:layout_width="190dp"
+        android:layout_width="180dp"
         android:layout_gravity="top|left"
         android:layout_height="wrap_content"
         android:text="Facility Name"
@@ -36,7 +36,7 @@
         />
 
         <TextView
-            android:layout_width="190dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:id="@+id/single_brief_distance"
             android:layout_marginLeft="14dp"
@@ -48,7 +48,7 @@
             />
     </LinearLayout>
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="140dp"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="2dp"
