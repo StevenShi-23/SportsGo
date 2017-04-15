@@ -24,4 +24,6 @@
     <string name="title_activity_complete_viw">Map</string>
     <string name="drawer_open">Drawer open</string>
     <string name="drawer_close">Drawer closed</string>
+    <string name="sign_up">No account yet?<u>Create one</u></string>
+    <string name="login">Already a member? <u>Login</u></string>
 </resources>
